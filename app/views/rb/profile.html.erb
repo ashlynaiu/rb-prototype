@@ -571,9 +571,33 @@
 		  </div>
 <!-- Begin Household -->
 		  <div class="slds-tabs__content slds-hide main-tab-content" role="tabpanel" id="main-tab-content-relationships">
-		    <div class="slds-card slds-white-card-temp" >
-			  <img src="<%= asset_path('images/household-summary.png') %>" alt="dashboard" style="padding:1rem;" />
-			</div>
+			<div class="slds-card slds-white-card-temp">
+		    	<div class="slds-card__header">
+			    	<h2 class="slds-text-heading--medium slds-truncate">Household Summary</h2><a href="#">View Household</a>
+			  	</div>
+			  	<div class="slds-card__body slds-grid">
+			  		<div class="slds-col--padded slds-size--1-of-5">
+			  			<span class="slds-text-heading--label">Total Accounts</span>
+			  			<span>$6,500,000</span>
+			  		</div>
+			  		<div class="slds-col--padded slds-size--1-of-5">
+			  			<span class="slds-text-heading--label">AUM</span>
+			  			<span>$2,200,500</span>
+			  		</div>
+			  		<div class="slds-col--padded slds-size--1-of-5">
+			  			<span class="slds-text-heading--label">Assets Held Away</span>
+			  			<span>$3,700,500</span>
+			  		</div>
+			  		<div class="slds-col--padded slds-size--1-of-5">
+			  			<span class="slds-text-heading--label">Last Interaction</span>
+			  			<span>8/18/2015</span>
+			  		</div>
+			  		<div class="slds-col--padded slds-size--1-of-5">
+			  			<span class="slds-text-heading--label">Next Interaction</span>
+			  			<span>12/15/2015</span>
+			  		</div>
+			  	</div>
+		    </div>
 		    <!-- Begin Card -->
   			<div class="slds-card" style="text-align:center; padding:1rem 0;">
 			  <img src="<%= asset_path('images/householding.png') %>" alt="dashboard" style="padding:1rem;" />
