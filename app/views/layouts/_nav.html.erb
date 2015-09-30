@@ -1,0 +1,199 @@
+<div class="tempSideNav" style="min-height:100%; background-color:rgb(22, 50, 92); width:240px;overflow:hidden">
+	<ul class="slds-nowrap" style="width:240px">
+		<li id="menu-btn-temp">
+			<a href="#" class="sidenav-row-temp">
+				<span class="slds-icon__container slds-icon-utility-rows">
+				  <svg aria-hidden="true" class="slds-icon slds-icon--small">
+				    <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#rows"></use>
+				  </svg>
+				</span>
+			</a>
+		</li>
+<% if request.original_url.include? "today/today" %>
+		<li class="selected-temp">
+			<%= link_to(root_path+'today/today?i=02u6100000052eW') do %>
+				<span class="slds-icon__container slds-icon-standard-today">
+				  <svg aria-hidden="true" class="slds-icon">
+				    <use xlink:href="<%= asset_path('icons/standard-sprite/svg/symbols.svg') %>#today"></use>
+				  </svg>
+				</span>
+				Today
+			<% end %>
+		</li>
+<% else %>
+		<li>
+			<%= link_to(root_path+'today/today?i=02u6100000052eW') do %>
+				<span class="slds-icon__container">
+				  <svg aria-hidden="true" class="slds-icon">
+				    <use xlink:href="<%= asset_path('icons/standard-sprite/svg/symbols.svg') %>#today"></use>
+				  </svg>
+				</span>
+				Today
+			<% end %>
+		</li>
+<% end %>
+<% if request.original_url.include? "sales/leadlist" %>
+		<li class="selected-temp">
+			<%= link_to(root_path+'sales/leadlist?i=02u6100000052eW') do %>
+				<span class="slds-icon__container">
+				  <svg aria-hidden="true" class="slds-icon slds-icon-standard-lead">
+				    <use xlink:href="<%= asset_path('icons/standard-sprite/svg/symbols.svg') %>#lead"></use>
+				  </svg>
+				</span>
+				Leads
+			<% end %>
+		</li>
+<% else %>
+		<li>
+			<%= link_to(root_path+'sales/leadlist?i=02u6100000052eW') do %>
+				<span class="slds-icon__container">
+				  <svg aria-hidden="true" class="slds-icon">
+				    <use xlink:href="<%= asset_path('icons/standard-sprite/svg/symbols.svg') %>#lead"></use>
+				  </svg>
+				</span>
+				Leads
+			<% end %>
+		</li>
+<% end %>
+<% if request.original_url.include? "wm/bob" %>
+		<li class="selected-temp">
+			<%= link_to(root_path+'wm/bob?i=02u6100000052eW') do %>
+				<span class="slds-icon__container">
+				  <svg aria-hidden="true" class="slds-icon slds-icon-custom-15">
+				    <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom15"></use>
+				  </svg>
+				</span>
+				Clients
+			<% end %>
+		</li>
+<% else %>
+		<li>
+			<%= link_to(root_path+'wm/bob?i=02u6100000052eW') do %>
+				<span class="slds-icon__container">
+				  <svg aria-hidden="true" class="slds-icon">
+				    <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom15"></use>
+				  </svg>
+				</span>
+				Clients
+			<% end %>
+		</li>
+<% end %>
+<% if request.original_url.include? "wm/profile" %>
+		<li class="selected-temp">
+			<%= link_to(root_path+'wm/profile?i=02u6100000052eW') do %>
+				<span class="slds-icon__container">
+				  <svg aria-hidden="true" class="slds-icon slds-icon-standard-people">
+				    <use xlink:href="<%= asset_path('icons/standard-sprite/svg/symbols.svg') %>#people"></use>
+				  </svg>
+				</span>
+				People
+			<% end %>
+		</li>
+<% else %>
+		<li>
+			<%= link_to(root_path+'wm/profile?i=02u6100000052eW') do %>
+				<span class="slds-icon__container">
+				  <svg aria-hidden="true" class="slds-icon">
+				    <use xlink:href="<%= asset_path('icons/standard-sprite/svg/symbols.svg') %>#people"></use>
+				  </svg>
+				</span>
+				People
+			<% end %>
+		</li>
+<% end %>
+<% if request.original_url.include? "cb/profile" %>
+		<li class="selected-temp">
+			<%= link_to(root_path+'cb/profile?i=02u6100000052eW') do %>
+				<span class="slds-icon__container">
+				  <svg aria-hidden="true" class="slds-icon slds-icon-standard-account">
+				    <use xlink:href="<%= asset_path('icons/standard-sprite/svg/symbols.svg') %>#account"></use>
+				  </svg>
+				</span>
+				Accounts
+			<% end %>
+		</li>
+<% else %>
+		<li>
+			<%= link_to(root_path+'cb/profile?i=02u6100000052eW') do %>
+				<span class="slds-icon__container">
+				  <svg aria-hidden="true" class="slds-icon">
+				    <use xlink:href="<%= asset_path('icons/standard-sprite/svg/symbols.svg') %>#account"></use>
+				  </svg>
+				</span>
+				Accounts
+			<% end %>
+		</li>
+<% end %>
+<% if request.original_url.include? "rb/people" %>
+		<li class="selected-temp">
+			<%= link_to(root_path+'rb/people?i=02u6100000052eW') do %>
+				<span class="slds-icon__container">
+				  <svg aria-hidden="true" class="slds-icon slds-icon-standard-people">
+				    <use xlink:href="<%= asset_path('icons/standard-sprite/svg/symbols.svg') %>#people"></use>
+				  </svg>
+				</span>
+				RB - People
+			<% end %>
+		</li>
+<% else %>
+		<li>
+			<%= link_to(root_path+'rb/people?i=02u6100000052eW') do %>
+				<span class="slds-icon__container">
+				  <svg aria-hidden="true" class="slds-icon">
+				    <use xlink:href="<%= asset_path('icons/standard-sprite/svg/symbols.svg') %>#people"></use>
+				  </svg>
+				</span>
+				RB - People
+			<% end %>
+		</li>
+<% end %>
+<% if request.original_url.include? "rb/profile" %>
+		<li class="selected-temp">
+			<%= link_to(root_path+'rb/profile?i=02u6100000052eW') do %>
+				<span class="slds-icon__container">
+				  <svg aria-hidden="true" class="slds-icon slds-icon-standard-people">
+				    <use xlink:href="<%= asset_path('icons/standard-sprite/svg/symbols.svg') %>#people"></use>
+				  </svg>
+				</span>
+				RB - Profile
+			<% end %>
+		</li>
+<% else %>
+		<li>
+			<%= link_to(root_path+'rb/profile?i=02u6100000052eW') do %>
+				<span class="slds-icon__container">
+				  <svg aria-hidden="true" class="slds-icon">
+				    <use xlink:href="<%= asset_path('icons/standard-sprite/svg/symbols.svg') %>#people"></use>
+				  </svg>
+				</span>
+				RB - Profile
+			<% end %>
+		</li>
+<% end %>
+	</ul>
+	<div class="slds-p-top--large" style="text-align:center; width:240px;">
+		<button class="slds-button slds-theme--error slds-p-horizontal--small" id="clear-storage"> Clear Storage</button>
+	</div>
+</div>
+<script>
+$(document).ready( function(){
+	// see if there are existing items
+	if (!localStorage.getItem("navToggle")) {
+		// Set data
+		localStorage.setItem("navToggle", 'Open')
+	}
+
+
+    $('#menu-btn-temp').click( function() {
+        var toggleWidth = $(".tempSideNav").width() == 240 ? "56px" : "240px";
+        $('.tempSideNav').animate({ width: toggleWidth });
+        var navOpen = $(".tempSideNav").width() == 240 ? "Closed" : "Open";
+
+        localStorage.setItem("navToggle", navOpen);
+    });
+
+    var navToggle = localStorage.getItem('navToggle') == 'Closed' ? $('.tempSideNav').width('56') : $('.tempSideNav').width('240');
+
+    $('#clear-storage').click( function() {localStorage.clear(); });
+});
+</script>
