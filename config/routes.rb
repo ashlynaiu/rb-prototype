@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+  
   get 'rb/people'
-
   get 'rb/profile'
+  get 'rb/financialdetails'
+
+  get 'sales/leadlist'
 
   get 'mc/journey'
 
@@ -14,10 +17,7 @@ Rails.application.routes.draw do
   get 'today/today'
 
   get 'wm/bob'
-
   get 'wm/profile'
-
-  get 'sales/leadlist'
 
   get 'cb/profile'
 

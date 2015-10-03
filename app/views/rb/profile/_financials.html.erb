@@ -50,11 +50,12 @@
     <table class="slds-table slds-table--bordered slds-max-medium-table--stacked-horizontal slds-no-row-hover">
       <thead>
         <tr>
-          <th class="slds-text-heading--label slds-size--1-of-5" scope="col">Name</th>
-          <th class="slds-text-heading--label slds-size--1-of-5" scope="col">Type</th>
-          <th class="slds-text-heading--label slds-size--1-of-5 slds-text-align--right" scope="col">Open Date</th>
-          <th class="slds-text-heading--label slds-size--1-of-5 slds-text-align--right" scope="col">Balance</th>
-          <th class="slds-text-heading--label slds-size--1-of-5" scope="col">Status</th>
+          <th class="slds-text-heading--label slds-size--1-of-6" scope="col">Name</th>
+          <th class="slds-text-heading--label slds-size--1-of-6" scope="col">Type</th>
+          <th class="slds-text-heading--label slds-size--1-of-6" scope="col">Role</th>
+          <th class="slds-text-heading--label slds-size--1-of-6 slds-text-align--right" scope="col">Open Date</th>
+          <th class="slds-text-heading--label slds-size--1-of-6 slds-text-align--right" scope="col">Balance</th>
+          <th class="slds-text-heading--label slds-size--1-of-6" scope="col">Status</th>
           <th class="slds-row-action" scope="col">
             <button class="slds-button slds-button--icon-border-filled slds-button--icon-border-small">
               <svg aria-hidden="true" class="slds-button__icon slds-button__icon--hint slds-button__icon--small">
@@ -67,8 +68,9 @@
       </thead>
       <tbody>
         <tr class="slds-hint-parent">
-          <td class="slds-size--1-of-5" data-label="Name">Cumulus Annuity</td>
+          <td class="slds-size--1-of-5" data-label="Name"><%= link_to(root_path+'rb/financialdetails?i=02u6100000052eW') do %>Cumulus Annuity<% end %></a></td>
           <td class="slds-size--1-of-5" data-label="Type">Annuity</td>
+          <td class="slds-size--1-of-5" data-label="Role=">Owner</td>
           <td class="slds-size--1-of-5 slds-text-align--right" data-label="Open Date">5/8/2012</td>
           <td class="slds-size--1-of-5 slds-text-align--right" data-label="Balance">$250,465.25</td>
           <td class="slds-size--1-of-5 slds-success-text-temp" data-label="status">Good</td>

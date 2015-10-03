@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class RbControllerTest < ActionController::TestCase
-  test "should get people" do
-    get :people
+  test "should get financial-details" do
+    get :financial-details
     assert_response :success
   end
 
