@@ -1,0 +1,72 @@
+<div class="slds-hide" id="modal">
+ <div aria-hidden="false" role="dialog" class="slds-modal slds-fade-in-open">
+    <div class="slds-modal__container">
+      <div class="slds-modal__header">
+        <h2 class="slds-text-heading--medium" id="modal-header">Modal Header</h2>
+        <button class="slds-button slds-modal__close modal-action" data-modal-target = "close-modal">
+          <svg aria-hidden="true" class="slds-button__icon slds-button__icon--inverse slds-button__icon--large">
+            <use xlink:href="/assets/icons/action-sprite/svg/symbols.svg#close"></use>
+          </svg>
+          <span class="slds-assistive-text">Close</span>
+        </button>
+      </div>
+      <div class="slds-modal__content" id="modal-content">
+        <div>
+          <p>Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id consequat veniam incididunt duis in sint irure nisi. Mollit officia cillum Lorem ullamco minim nostrud elit officia tempor esse quis. Cillum sunt ad dolore
+            quis aute consequat ipsum magna exercitation reprehenderit magna. Tempor cupidatat consequat elit dolor adipisicing.</p>
+          <p>Dolor eiusmod sunt ex incididunt cillum quis nostrud velit duis sit officia. Lorem aliqua enim laboris do dolor eiusmod officia. Mollit incididunt nisi consectetur esse laborum eiusmod pariatur proident. Eiusmod et adipisicing culpa deserunt
+            nostrud ad veniam nulla aute est. Labore esse esse cupidatat amet velit id elit consequat minim ullamco mollit enim excepteur ea.</p>
+        </div>
+      </div>
+      <div class="slds-modal__footer" id="modal-footer">
+        <button class="slds-button slds-button--neutral modal-action" data-modal-target = "cancel-modal">Cancel</button>
+        <button class="slds-button slds-button--neutral slds-button--brand modal-action" data-modal-target = "save-modal">Save</button>
+      </div>
+    </div>
+  </div>
+  <div class="slds-modal-backdrop slds-modal-backdrop--open"></div>
+</div>
+<script>
+$(document).ready( function(){
+
+    $(document).on('click', '.modal-action', function (){
+    	//counter++;
+    	//console.log(counter);
+    	var modalHeader, modalContent, modalFooter;
+
+		var modalTarget = $(this).data('modal-target');
+		switch(modalTarget){
+			case 'add-member':
+				modalHeader = 'Add Member';
+				modalContent = 'Modal Content';
+				modalFooter = '<button class="slds-button slds-button--neutral modal-action" data-modal-target = "cancel-modal">Cancel</button> <button class="slds-button slds-button--neutral slds-button--brand modal-action" data-modal-target = "save-modal">Save</button>';
+				break;
+			case 'new-case':
+				modalHeader = 'New Case';
+				modalContent = 'Modal Content';
+				modalFooter = '<button class="slds-button slds-button--neutral modal-action">Cancel</button> <button class="slds-button slds-button--neutral slds-button--brand modal-action">Save</button>';
+				console.log(modalTarget, modalHeader);
+				break;
+			case 'cancel-modal':
+				console.log('Cancel Button');
+				break;
+			default:
+				modalHeader = 'New Switch Needed';
+				modalContent = 'data-modal-target = '+ modalTarget;
+				modalFooter = '<button class="slds-button slds-button--neutral modal-action" data-modal-target = "cancel-modal">Cancel</button> <button class="slds-button slds-button--neutral slds-button--brand modal-action" data-modal-target = "save-modal">Save</button>';
+				break;
+		};
+		$('#modal-header').empty();
+		$('#modal-header').append(modalHeader);
+
+		$('#modal-content').empty();
+		$('#modal-content').append(modalContent);
+
+		$('#modal-footer').empty();
+		$('#modal-footer').append(modalFooter);
+
+    	$( "#modal" ).toggleClass( "slds-hide slds-fade-in-open");
+    });
+
+});
+</script>
