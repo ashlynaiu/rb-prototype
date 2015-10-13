@@ -36,3 +36,9 @@ bower.json
 
 # Ignore pow environment settings
 .powenv
+
+*.log
+
+*.cache
+
+*.pid
