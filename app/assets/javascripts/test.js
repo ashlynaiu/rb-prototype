@@ -1,75 +1,94 @@
-var rbDB = new localStorageDB("rb", localStorage);
+var rbDB = new localStorageDB('rb', localStorage);
 if(rbDB.isNew()){
 	// create the "client" data
 	var rows = [
-		{uid: "C001", name: "P Baun"}
+		{uid: 'C001', firstName: 'Rachel', lastName:'Adams'},
+		{uid: 'C002', firstName: 'Sarah', lastName:'Bui'},
 	];
 	// create the "client" table
-	rbDB.createTableWithData("client", rows);
+	rbDB.createTableWithData('client', rows);
 	
 	// create the "prospect" data
 	var rows = [
-		{uid: "C001", name: "P Baun"},
-		{uid: "C002", name: "P Pab"}
+		{uid: 'P001', name: 'P Baun'},
+		{uid: 'P002', name: 'P Pab'},
 	];
 	// create the "prospect" table
-	rbDB.createTableWithData("prospect", rows);
+	rbDB.createTableWithData('prospect', rows);
 
 	// create the "financialAccount" data
 	var rows = [
-		{uid: "C001", name: "P Baun"}
+		{uid: 'FA001', accountType: 'credit', role:'owner', accountId:'120934884', openingDate:'5/8/2012', balance:'250,465.25', status:'Good'},
+		{uid: 'FA002', accountType: 'mortgage', role:'owner', accountId:'120934234', openingDate:'6/8/2012', balance:'234,543', status:'Good'},
+		{uid: 'FA003', accountType: 'checking', role:'owner', accountId:'734950645', openingDate:'7/8/2012', balance:'80,435', status:'Good'},
+		{uid: 'FA004', accountType: 'credit', role:'owner', accountId:'647920583', openingDate:'8/8/2012', balance:'9,340', status:'Average'},
+		{uid: 'FA005', accountType: 'checking', role:'owner', accountId:'758930572', openingDate:'9/8/2012', balance:'10,342', status:'Poor'},
 	];
 	// create the "financialAccount" table
-	rbDB.createTableWithData("financialAccount", rows);
+	rbDB.createTableWithData('financialAccount', rows);
 
 	// create the "application" data
 	var rows = [
-		{uid: "C001", name: "P Baun"}
+		{uid: 'A001', name: 'P Baun'}
 	];
 	// create the "application" table
-	rbDB.createTableWithData("application", rows);
+	rbDB.createTableWithData('application', rows);
 
 	// create the "opportunity" data
 	var rows = [
-		{uid: "C001", name: "P Baun"}
+		{uid: 'O001', name: 'P Baun'}
 	];
 	// create the "opportunity" table
-	rbDB.createTableWithData("opportunity", rows);
+	rbDB.createTableWithData('opportunity', rows);
 
 	// create the "lead" data
 	var rows = [
-		{uid: "C001", name: "P Baun"}
+		{uid: 'L001', name: 'P Baun'}
 	];
 	// create the "lead" table
-	rbDB.createTableWithData("lead", rows);
+	rbDB.createTableWithData('lead', rows);
 
 	// create the "financialGoals" data
 	var rows = [
-		{uid: "C001", name: "P Baun"}
+		{uid: 'FG001', name: 'P Baun'}
 	];
 	// create the "financialGoals" table
-	rbDB.createTableWithData("financialGoals", rows);
+	rbDB.createTableWithData('financialGoals', rows);
 
 	// create the "accountRelationships" data
 	var rows = [
-		{uid: "C001", name: "P Baun"}
+		{uid: 'AR001', name: 'P Baun'}
 	];
 	// create the "accountRelationships" table
-	rbDB.createTableWithData("accountRelationships", rows);
+	rbDB.createTableWithData('accountRelationships', rows);
 
 	// create the "employeeProfile" data
 	var rows = [
-		{uid: "C001", name: "P Baun"}
+		{uid: 'EP001', name: 'P Baun'}
 	];
 	// create the "employeeProfile" table
-	rbDB.createTableWithData("employeeProfile", rows);
+	rbDB.createTableWithData('employeeProfile', rows);
 
 	// create the "leadRanking" data
 	var rows = [
-		{uid: "C001", name: "P Baun"}
+		{uid: 'LR001', name: 'P Baun'}
 	];
 	// create the "leadRanking" table
-	rbDB.createTableWithData("leadRanking", rows);
+	rbDB.createTableWithData('leadRanking', rows);
+
+
+
+
+	// create the "xref" data
+	var rows = [
+		{pid: 'C001', object: 'financialAccount', cid:'FA001'},
+		{pid: 'C001', object: 'financialAccount', cid:'FA002'},
+		{pid: 'C001', object: 'financialAccount', cid:'FA003'},
+		{pid: 'C002', object: 'financialAccount', cid:'FA004'},
+		{pid: 'C002', object: 'financialAccount', cid:'FA005'},
+	];
+	// create the "leadRanking" table
+	rbDB.createTableWithData('xref', rows);
 
 	// commit the database to localStorage
     // all create/drop/insert/update/delete operations should be committed
@@ -78,11 +97,31 @@ if(rbDB.isNew()){
 
 
 var queryResult = rbDB.queryAll("client");
+ 
+// select all financialAccount id's based on client ID
+var queryResult1 = rbDB.queryAll("xref", {
+    query: function(row) {
+        if(row.pid == "C001" && row.object == "financialAccount") {
+        	return true;
+        } else {
+        	return false;
+        }
+    }
+});
+
 
 $(document).ready( function(){
 	queryResult.forEach(function(datum) {
-		$('#main-tab-content-details').prepend('<div>'+datum.uid+': '+datum.name+'</div>')
+		$('#main-tab-content-details').prepend('<div>'+datum.uid+': '+datum.firstName+'</div>')
 	});
+
+	queryResult1.forEach(function(datum) {
+		$('#main-tab-content-details').prepend('<div>'+datum.pid+': '+datum.object+': '+datum.cid+'</div>')
+	});
+
+
+
+
 });
 
 
