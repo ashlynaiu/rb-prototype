@@ -68,8 +68,40 @@
       </thead>
       <tbody>
         <tr class="slds-hint-parent">
-          <td class="slds-size--1-of-5" data-label="Name"><%= link_to(root_path+'rb/financialdetails?i=02u6100000052eW') do %>Cumulus Annuity<% end %></a></td>
+          <td class="slds-size--1-of-5 financial-data-test" data-label="Name" data-financial-type = "checking"><%= link_to(root_path+'rb/financialdetails?i=02u6100000052eW') do %>Cumulus Annuity<% end %></td>
           <td class="slds-size--1-of-5" data-label="Type">Annuity</td>
+          <td class="slds-size--1-of-5" data-label="Role=">Owner</td>
+          <td class="slds-size--1-of-5 slds-text-align--right" data-label="Open Date">5/8/2012</td>
+          <td class="slds-size--1-of-5 slds-text-align--right" data-label="Balance">$250,465.25</td>
+          <td class="slds-size--1-of-5 slds-success-text-temp" data-label="status">Good</td>
+          <td>
+            <button class="slds-button slds-button--icon-border-filled slds-button--icon-border-small">
+              <svg aria-hidden="true" class="slds-button__icon slds-button__icon--hint slds-button__icon--small">
+                <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#down"></use>
+              </svg>
+              <span class="slds-assistive-text">Show More</span>
+            </button>
+          </td>
+        </tr>
+        <tr class="slds-hint-parent">
+          <td class="slds-size--1-of-5 financial-data-test" data-label="Name" data-financial-type = "mortgage"><%= link_to(root_path+'rb/financialdetails?i=02u6100000052eW') do %>Cumulus Mortgage<% end %></td>
+          <td class="slds-size--1-of-5" data-label="Type">Mortgage</td>
+          <td class="slds-size--1-of-5" data-label="Role=">Owner</td>
+          <td class="slds-size--1-of-5 slds-text-align--right" data-label="Open Date">5/8/2012</td>
+          <td class="slds-size--1-of-5 slds-text-align--right" data-label="Balance">$250,465.25</td>
+          <td class="slds-size--1-of-5 slds-success-text-temp" data-label="status">Good</td>
+          <td>
+            <button class="slds-button slds-button--icon-border-filled slds-button--icon-border-small">
+              <svg aria-hidden="true" class="slds-button__icon slds-button__icon--hint slds-button__icon--small">
+                <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#down"></use>
+              </svg>
+              <span class="slds-assistive-text">Show More</span>
+            </button>
+          </td>
+        </tr>
+        <tr class="slds-hint-parent">
+          <td class="slds-size--1-of-5 financial-data-test" data-label="Name" data-financial-type = "credit"><%= link_to(root_path+'rb/financialdetails?i=02u6100000052eW') do %>Cumulus Credit Card<% end %></td>
+          <td class="slds-size--1-of-5" data-label="Type">Credit Card</td>
           <td class="slds-size--1-of-5" data-label="Role=">Owner</td>
           <td class="slds-size--1-of-5 slds-text-align--right" data-label="Open Date">5/8/2012</td>
           <td class="slds-size--1-of-5 slds-text-align--right" data-label="Balance">$250,465.25</td>
@@ -157,3 +189,37 @@
   <footer class="slds-card__footer"><a href="#">View All</a></footer>
 </div>
 <!-- End Card -->
+
+<script>
+
+$(document).ready( function(){
+
+    $(document).on('click', '.financial-data-test', function (){
+     
+    // see if there are existing items
+    if (!localStorage.getItem('financialDetailsType')) {
+      // Set data
+      localStorage.setItem('financialDetailsType', 'checking')
+    }
+
+      var financialDetails = $(this).data('financial-type');
+      
+      switch(financialDetails){
+        case 'checking':
+          localStorage.setItem('financialDetailsType', 'checking')
+          break;
+        case 'mortgage':
+          localStorage.setItem('financialDetailsType', 'mortgage')
+          break;
+        case 'credit':
+          localStorage.setItem('financialDetailsType', 'credit')
+          break;
+        default:
+          localStorage.setItem('financialDetailsType', 'checking')
+          break;
+      };
+
+    });
+
+});
+</script>

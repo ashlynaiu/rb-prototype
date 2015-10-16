@@ -2,54 +2,7 @@
 	<%= render 'layouts/nav' %>
 	<div class="slds-col grid-1" style="overflow:scroll;">
 	 <div class="slds-grid slds-wrap slds-align-top">
-	 	<div class="slds-col slds-size--1-of-1 navbar-temp">
-	 		<div class="slds-grid">
-			  <div class="slds-col slds-align-middle">
-			  	<span class="slds-icon__container slds-icon-utility-salesforce1">
-				  <svg aria-hidden="true" class="slds-icon slds-icon-text-default icon-salesforce1-temp">
-				    <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#salesforce1"></use>
-				  </svg>
-				</span>
-			  </div>
-			  <div class="slds-col slds-align-middle" style="text-align:center;">
-			  	<div class="slds-input" style="text-align:left;">
-			  		<span class="slds-icon__container slds-icon-utility-search slds-m-horizontal--x-small">
-					  <svg aria-hidden="true" class="slds-icon--x-small slds-icon-text-default">
-					    <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#search"></use>
-					  </svg>
-					</span>
-			  		<input id="input__filter" type="text" placeholder="Search Salesforce" style="width:70%; border:none;">
-			  	</div>		  	
-			  </div>
-			  <div class="slds-col slds-align-middle icon-container ">
-				<span class="slds-icon__container slds-icon-utility-apps slds-m-horizontal--x-small">
-				  <svg aria-hidden="true" class="slds-icon--small slds-icon-text-default">
-				    <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#apps"></use>
-				  </svg>
-				</span>
-				<span class="slds-icon__container slds-icon-utility-question slds-m-horizontal--x-small">
-				  <svg aria-hidden="true" class="slds-icon--small slds-icon-text-default">
-				    <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#question"></use>
-				  </svg>
-				</span>
-				<span class="slds-icon__container slds-icon-utility-setup slds-m-horizontal--x-small">
-				  <svg aria-hidden="true" class="slds-icon--small slds-icon-text-default">
-				    <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#setup"></use>
-				  </svg>
-				</span>
-				<span class="slds-icon__container slds-icon-utility-notification slds-m-horizontal--x-small">
-				  <svg aria-hidden="true" class="slds-icon--small slds-icon-text-default">
-				    <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#notification"></use>
-				  </svg>
-				</span>
-		 		<%= link_to(root_path) do %>
-			 		<span class="slds-avatar slds-avatar--circle slds-avatar--small slds-m-horizontal--x-small">
-					  <img src="<%= asset_path('images/Ryan.png') %>" alt="person name" />
-					</span>
-				<% end %>
-			  </div>
-			</div>
-	 	</div>
+	 	<%= render 'layouts/searchbar' %>
 		<nav class="slds-col slds-size--1-of-1">
 		<!-- begin header -->
 			<div class="slds-page-header">
@@ -104,6 +57,48 @@
 						  </div>
 			          </div>
 			         </div>
+			    </div>
+			  </div>
+			  <div class="slds-grid slds-page-header__detail-row">
+			    <div class="slds-col--padded slds-size--1-of-4">
+			      <dl>
+			        <dt>
+			          <p class="slds-truncate" title="Field 1">Customer Segment</p>
+			        </dt>
+			        <dd>
+			          <p class="slds-text-body--regular slds-truncate" title="1">Diamond</p>
+			        </dd>
+			      </dl>
+			    </div>
+			    <div class="slds-col--padded slds-size--1-of-4">
+			      <dl>
+			        <dt>
+			          <p class="slds-truncate" title="Field 1">Life Time Value</p>
+			        </dt>
+			        <dd>
+			          <p class="slds-text-body--regular slds-truncate" title="2">$3,500,000</p>
+			        </dd>
+			      </dl>
+			    </div>
+			    <div class="slds-col--padded slds-size--1-of-4">
+			      <dl>
+			        <dt>
+			          <p class="slds-truncate" title="Field 1">Products</p>
+			        </dt>
+			        <dd>
+			          <p class="slds-text-body--regular slds-truncate" title="2">TBD</p>
+			        </dd>
+			      </dl>
+			    </div>
+			    <div class="slds-col--padded slds-size--1-of-4">
+			      <dl>
+			        <dt>
+			          <p class="slds-truncate" title="Field 1">Last Interaction</p>
+			        </dt>
+			        <dd>
+			          <p class="slds-text-body--regular slds-truncate" title="2">9/1/2015  •  Email</p>
+			        </dd>
+			      </dl>
 			    </div>
 			  </div>
 			</div>
@@ -511,6 +506,10 @@
 <!-- Being Lazy -->
 <script>
 $(document).ready(function(){
+
+	var financialDataTest = localStorage.getItem('financialDetailsType');
+
+	$('#basic-details-container').prepend(financialDataTest);
 
 	$('#collaborate__send').click(function() {
 
