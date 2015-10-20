@@ -1,3 +1,60 @@
+var firstNameArray = ['Jack', 'Cindy', 'Henry', 'Charles', 'Andrea', 'Carey', 'Cristopher', 'Dan', 'Deborah', 'Frank', 'Jack', 'Janice', 'Kay', 'Michael', 'Nancy', 'Rachel', 'Randy', 'Robert', 'Stefanie', 'Peter', 'Steve', 'Stuart', 'Victoria', 'Lyn','Sally','Judy','Sophia','Aiden','Emma','Jackson','Olivia','Ethan','Isabella','Liam','Ava','Mason','Lily','Noah','Zoe','Lucas','Chloe','Jacob','Mia','Jayden','Madison','Jack','Emily','Logan','Ella','Ryan','Madelyn','Caleb','Benjamin','Abigail','Aubrey','William','Addison','Avery','Alexander','Layla','Elijah','Hailey','Matthew','Amelia','Dylan','Hannah','James','Owen','Conner','Brayden','Carter','Charlotte','Kaitlyn','Harper','Kaylee','Sophie','Mackenzie','Peyton','Riley','Grace','Brooklyn','Sarah','Aaliyah','Anna','Arianna','Ellie','Natalie','Isabelle','Lillian','Evelyn','Elizabeth','Lyla','Lucy','Claire','Makayla','Kylie','Audrey','Landon','Joshua','Luke','Daniel','Gabriel','Nicholas','Nathan','Oliver','Andrew','Gavin','Cameron','Eli','Max','Isaac', 'Evan','Samuel','Grayson','Tyler','Zachary','Wyatt','Joseph'];
+var lastNameArray = ['Medici', 'Bowden', 'Con', 'Underwood', 'Hickey','Star','Mainwaring','Rund','Delaney','Jones','Muir','Swanson','Baxter','Linstrom','Hosie','Katz','Boyle','Wood','Matteson','Montgomery','Jackson','Baker','Murry','Smith','Adams','Cord','Johnson','Williams','Brown','Miller','Davis','Garcia','Rodriguez','Wilson','Martinez','Anderson','Taylor','Thomas','Hernandez','Moore','Martin','White','Lopez','Lee','Harris','Lewis','Walker','Perez','King','Hall','Hill','Campbell','Mitchell','Howard','Ward','Foster','Myers','Reyes','Fisher','Coleman','Simmons','Patterson','Ramos','Kim','Gutierrez','Jenkins','Ortiz','Bridges','Abbot','Boone','Sweeney','York','Farrell','Skinner','Franco','Combes','Whitaker'];
+var leadStatus = ['Open','Closed','In Progress'];
+var leadSource = ['Mobile App','Website','Branch','ATM','Email'];
+var leadType = ['Credit Card','Checking Account','Savings Account','Debit/Pre-Paid','Foreign Exchange'];
+
+
+
+
+
+
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function getRandomDate(pastorfuture){
+	if (pastorfuture == 'future'){
+		return Date.today().add(getRandomInt(0,500)).day().toString('MM/dd/yyyy');
+	}
+	if (pastorfuture == 'past'){
+		return Date.today().add(-getRandomInt(0,500)).day().toString('MM/dd/yyyy');
+	}
+}
+
+function getRandomArrayValue(array){
+	return array[getRandomInt(0,array.length-1)];
+};
+
+function getRandomLeadData(){
+	var m = 2;
+	for (var i = 0; i < 100; i++) {
+		rbDB.insert("lead", 
+			{uid: 'L'+ m++, 
+			firstName: getRandomArrayValue(firstNameArray),
+			lastName: getRandomArrayValue(lastNameArray),
+			type: getRandomArrayValue(leadType),
+			leadValue: getRandomInt(45, 100),
+			rating: getRandomInt(1, 4),
+			quality: 'a3',
+			status: getRandomArrayValue(leadStatus),
+			creditScore: getRandomInt(550, 900),
+			assignedTo: '--',
+			source: getRandomArrayValue(leadSource),
+			lastContacted: getRandomDate('past'),
+			lastActivity: getRandomDate('past'),
+			products:'Credit, Checking',
+			}
+		);
+	}
+}
+function getRandomOpptyData(){
+	for (var i = 0; i < 100; i++) {
+		
+	};
+}
+
 var rbDB = new localStorageDB('rb', localStorage);
 if(rbDB.isNew()){
 	// create the "client" data
@@ -43,10 +100,25 @@ if(rbDB.isNew()){
 
 	// create the "lead" data
 	var rows = [
-		{uid: 'L001', name: 'P Baun'}
-	];
+		{uid: 'L1', 
+		firstName: 'Rachel',
+		lastName: 'Adams',
+		type: 'Credit Card',
+		leadValue: getRandomInt(45, 100),
+		rating: getRandomInt(1, 4),
+		quality: 'a3',
+		status: 'Open',
+		creditScore: getRandomInt(550, 900),
+		assignedTo: '--',
+		source: 'Mobile',
+		lastContacted: getRandomDate('past'),
+		lastActivity: getRandomDate('past'),
+		products:'Credit, Checking',
+	}];
 	// create the "lead" table
 	rbDB.createTableWithData('lead', rows);
+	// add Random Lead Data
+	getRandomLeadData();
 
 	// create the "financialGoals" data
 	var rows = [
@@ -97,6 +169,8 @@ if(rbDB.isNew()){
 
 
 var queryResult = rbDB.queryAll("client");
+
+var queryResult2 = rbDB.queryAll("lead");
  
 // select all financialAccount id's based on client ID
 var queryResult1 = rbDB.queryAll("xref", {
@@ -118,8 +192,6 @@ $(document).ready( function(){
 	queryResult1.forEach(function(datum) {
 		$('#main-tab-content-details').prepend('<div>'+datum.pid+': '+datum.object+': '+datum.cid+'</div>')
 	});
-
-
 
 
 });

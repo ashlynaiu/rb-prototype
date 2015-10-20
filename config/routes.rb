@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  get 'rb/leadlist'
+
   get 'rb/people'
   get 'rb/profile'
   get 'rb/financialdetails'

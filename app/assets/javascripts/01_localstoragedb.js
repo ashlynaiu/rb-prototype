@@ -1,3 +1,4 @@
+
 !(function (_global, undefined) {
 	function localStorageDB(db_name, engine) {
 		var db_prefix = 'db_',

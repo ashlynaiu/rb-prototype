@@ -1,0 +1,231 @@
+ <div class="grid-temp" style="height:100vh; width:100vw;">
+	<%= render 'layouts/nav' %>
+	<div class="slds-col grid-1" style="overflow:scroll;">
+	 <div class="slds-grid slds-wrap slds-align-top">
+	 	<%= render 'layouts/searchbar' %>
+		<nav class="slds-col slds-size--1-of-1">
+		<!-- begin header -->
+			<div class="slds-page-header">
+			  <div class="slds-grid">
+			    <div class="slds-media">
+			        <div class="slds-media__figure">
+			          <svg aria-hidden="true" class="slds-icon slds-icon--large slds-icon-standard-lead">
+			            <use xlink:href="<%= asset_path('icons/standard-sprite/svg/symbols.svg') %>#lead"></use>
+			          </svg>
+			        </div>
+		        </div>
+			    <div class="slds-col slds-has-flexi-truncate">
+			      <p class="slds-text-heading--label">Leads</p>
+			      <div class="slds-grid">
+			        <div class="slds-grid slds-type-focus slds-no-space slds-dropdown-trigger" style="display:inherit;">
+			          <h1 class="slds-text-heading--medium slds-truncate" title="My Leads (truncates)">My Leads</h1>
+			          <button class="slds-button slds-button--icon-bare slds-shrink-none slds-align-middle slds-m-left--x-small">
+			            <svg aria-hidden="true" class="slds-button__icon">
+			              <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#down"></use>
+			            </svg>
+			            <span class="slds-assistive-text">View More</span>
+			          </button>
+			          <div class="slds-dropdown slds-dropdown--left slds-dropdown--menu slds-dropdown--actions slds-m-top--x-large">
+					    <ul class="slds-dropdown__list" role="menu">
+					      <li id="menu-13-0" href="#" class="slds-dropdown__item"><a href="#" class="slds-truncate" role="menuitem">All</a></li>
+					      <li id="menu-14-1" href="#" class="slds-dropdown__item"><a href="#" class="slds-truncate" role="menuitem">My Leads</a></li>
+					      <li id="menu-15-2" href="#" class="slds-dropdown__item"><a href="#" class="slds-truncate" role="menuitem">My Opportunities</a></li>
+					    </ul>
+					  </div>
+			        </div>
+			        <button class="slds-button slds-button--icon-more slds-shrink-none slds-m-left--large" aria-haspopup="true">
+			          <svg aria-hidden="true" class="slds-button__icon">
+			            <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#settings"></use>
+			          </svg>
+			          <span class="slds-assistive-text">Settings</span>
+			          <svg aria-hidden="true" class="slds-button__icon slds-button__icon--x-small">
+			            <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#down"></use>
+			          </svg>
+			        </button>
+			        <button class="slds-button slds-button--brand slds-button-space-left slds-m-right--medium slds-shrink-none slds-align-middle slds-hide" aria-hidden="true">Save</button>
+			      </div>
+			    </div>
+			    <div class="slds-col slds-no-flex slds-align-bottom">
+			      <div class="slds-grid">
+			        <div class="slds-button-space-left">
+			          <button class="slds-button slds-button--icon-more" aria-haspopup="true">
+			            <svg aria-hidden="true" class="slds-button__icon">
+			              <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#table"></use>
+			            </svg>
+			            <span class="slds-assistive-text">Table</span>
+			            <svg aria-hidden="true" class="slds-button__icon slds-button__icon--x-small">
+			              <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#down"></use>
+			            </svg>
+			          </button>
+			        </div>
+			        <div class="slds-button-group slds-button-space-left" role="group">
+			          <button class="slds-button slds-button--icon-border">
+			            <svg aria-hidden="true" class="slds-button__icon">
+			              <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#chart"></use>
+			            </svg>
+			            <span class="slds-assistive-text">Chart</span>
+			          </button>
+			          <button class="slds-button slds-button--icon-border">
+			            <svg aria-hidden="true" class="slds-button__icon">
+			              <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#filterList"></use>
+			            </svg>
+			            <span class="slds-assistive-text">Filter List</span>
+			          </button>
+			          <button class="slds-button slds-button--icon-more">
+			            <svg aria-hidden="true" class="slds-button__icon">
+			              <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#sort"></use>
+			            </svg>
+			            <span class="slds-assistive-text">Sort</span>
+			            <svg aria-hidden="true" class="slds-button__icon slds-button__icon--x-small">
+			              <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#down"></use>
+			            </svg>
+			            <span class="slds-assistive-text">More</span>
+			          </button>
+			        </div>
+			        <div class="slds-button-group" role="group">
+			          <button class="slds-button slds-button--neutral">Actions</button>
+			          <div class="slds-button--last">
+			            <button class="slds-button slds-button--icon-border-filled">
+			              <svg aria-hidden="true" class="slds-button__icon">
+			                <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#down"></use>
+			              </svg>
+			              <span class="slds-assistive-text">More Actions</span>
+			            </button>
+			          </div>
+			        </div>
+			      </div>
+			    </div>
+			  </div>
+			  <p class="slds-text-body--small slds-m-top--x-small">10 items • Sorted by Lead Value</p>
+			</div>
+			<!-- end header -->
+		</nav>
+
+		<!-- begin grid -->
+		<main class="slds-col slds-size--1-of-2 slds-medium-size--5-of-6 slds-large-size--8-of-12">
+			<div class="row-main">
+				<!-- begin table -->
+				<table class="slds-table slds-table--bordered slds-max-medium-table--stacked">
+				  <thead>
+				    <tr class="slds-text-heading--label">
+				      <th class="slds-row-select" scope="col">
+				        <label class="slds-checkbox" for="select-all">
+				          <input name="checkbox" type="checkbox" id="select-all" />
+				          <span class="slds-checkbox--faux"></span>
+				          <span class="slds-form-element__label slds-assistive-text">select all</span>
+				        </label>
+				      </th>
+				      <th class="slds-is-sortable" scope="col">
+				        <span class="slds-truncate">Lead Name</span>
+				          <button class="slds-button slds-button--icon-bare slds-button--icon-border-small">
+				          <svg aria-hidden="true" class="slds-button__icon slds-button__icon--small">
+				            <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#arrowdown"></use>
+				          </svg>
+				        </button>
+				      </th>
+				      <th scope="col">
+				        <span class="slds-truncate">Lead Rank</span>
+				      </th>
+				      <th class="slds-is-sortable" scope="col">
+				        <span class="slds-truncate">Lead Value</span>
+				          <button class="slds-button slds-button--icon-bare slds-button--icon-border-small">
+				          <svg aria-hidden="true" class="slds-button__icon slds-button__icon--small" style="visibility:visible">
+				            <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#arrowdown"></use>
+				          </svg>
+				        </button>
+				      </th>
+				      <th scope="col">
+				        <span class="slds-truncate">Source</span>
+				      </th>
+				      <th scope="col">
+				        <span class="slds-truncate">Interested</span>
+				      </th>
+				      <th scope="col">
+				        <span class="slds-truncate">Owned</span>
+				      </th>
+				      <th scope="col">
+				        <span class="slds-truncate">Assigned To</span>
+				      </th>
+				      <th scope="col">
+				        <span class="slds-truncate">Status</span>
+				      </th>
+				      <th scope="col">
+				        <span class="slds-truncate">Last Contacted</span>
+				      </th>
+				      <th scope="col">
+				        <span class="slds-truncate">Last Activity</span>
+				      </th>
+				      <th class="slds-row-action" scope="col">
+				        <button class="slds-button slds-button--icon-border-filled slds-button--icon-border-small">
+				          <svg aria-hidden="true" class="slds-button__icon slds-button__icon--hint slds-button__icon--small">
+				            <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#down"></use>
+				          </svg>
+				          <span class="slds-assistive-text">Show More</span>
+				        </button>
+				      </th>
+				    </tr>
+				  </thead>
+				  <tbody id="leadlistTable">				 
+<!-- Populated from JSON -->				    
+				  </tbody>
+				</table>
+				<!-- end table -->
+			</div>
+		</main>
+	</div>
+</div>
+<!-- end grid -->
+
+<script>
+$(document).ready(function(){
+
+	var queryLeadsAll = rbDB.queryAll("lead", { 
+                        sort: [["leadValue", "DESC"]]
+                      });
+
+	queryLeadsAll.forEach(function(datum) {
+			switch(datum.rating){
+				case 4:
+					datum.rating = '<svg aria-hidden="true" class="icon-star-inactive"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-inactive"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-inactive"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg>';
+					break;
+				case 1:
+					datum.rating = '<svg aria-hidden="true" class="icon-star-active"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-inactive"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-inactive"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg>';
+					break;
+				case 2:
+					datum.rating = '<svg aria-hidden="true" class="icon-star-active"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-active"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-inactive"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg>';
+					break;
+				case 3:
+					datum.rating = '<svg aria-hidden="true" class="icon-star-active"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-active"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-active"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg>'; 
+					break;
+				default:
+					datum.rating = 'Unranked';
+					break;
+			};
+		// uid: 'L1', 
+		// firstName: 'Rachel',
+		// lastName: 'Adams',
+		// type: 'Credit Card',
+		// leadValue: getRandomInt(45, 100),
+		// rating: getRandomInt(1, 3),
+		// quality: 'a3',
+		// status: 'Open',
+		// creditScore: getRandomInt(550, 900),
+		// assignedTo: '--',
+		// source: 'mobile',
+		// lastContacted: getRandomDate('past'),
+		// lastActivity: getRandomDate('future'),
+		// products:'credit checking',
+
+		$('#leadlistTable').append('<tr class="slds-hint-parent"> <td class="slds-row-select"> <label class="slds-checkbox" for="select-row'+datum.uid+'"> <input name="select-row'+datum.uid+'" type="checkbox" id="select-row'+datum.uid+'" /> <span class="slds-checkbox--faux"></span> <span class="slds-form-element__label slds-assistive-text">select row1</span> </label> </td> <td data-label="lead-name"><a href="#" class="slds-truncate">'+datum.firstName+' '+datum.lastName+'</a></td> <td data-label="rank"> '+datum.rating+' </td> <td data-label="value"> <span class="slds-truncate">$'+datum.leadValue+'</span> </td> <td data-label="interest"> '+datum.source+' </td> <td data-label="value"> <span class="slds-truncate">'+datum.type+'</span> </td> <td data-label="customer">'+datum.products+'</td><td data-label="activity"> <span class="slds-truncate">'+datum.assignedTo+'</span> </td> <td data-label="activity"> <span class="slds-truncate">'+datum.status+'</span> </td> <td><span class="slds-truncate">'+datum.lastContacted+'</span></td><td data-label="activity"> <span class="slds-truncate">'+datum.lastActivity+'</span> </td> <td class="slds-row-action"> <button class="slds-button slds-button--icon-border-filled slds-button--icon-border-small"> <svg aria-hidden="true" class="slds-button__icon slds-button__icon--hint slds-button__icon--small"> <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#down"></use> </svg> <span class="slds-assistive-text">Show More</span> </button> </td> </tr>') 
+	})
+
+
+	//data.forEach(function(datum) {
+	//	$('#myTestElement').append('<tr><td>'+datum.name+'</td><td>'+datum.value+'<td><td>'+datum.datetime+'<td></tr>')
+	//})
+
+	// to clear the data
+	// localStorage.clear()
+
+})
+</script>
