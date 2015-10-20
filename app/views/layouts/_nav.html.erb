@@ -1,4 +1,4 @@
-<div class="tempSideNav" style="min-height:100%; background-color:rgb(22, 50, 92); width:240px; overflow:scroll">
+<div class="tempSideNav" style="min-height:100%; background-color:rgb(22, 50, 92); width:240px; overflow:hidden">
 	<ul class="slds-nowrap" style="width:240px">
 		<li id="menu-btn-temp">
 			<a href="#" class="sidenav-row-temp">
@@ -211,11 +211,9 @@
 </div>
 <script>
 $(document).ready( function(){
-	// see if there are existing items
-	if (!localStorage.getItem("navToggle")) {
-		// Set data
-		localStorage.setItem("navToggle", 'Open')
-	}
+// see if there are existing items
+
+var navToggle = localStorage.getItem('navToggle') == 'Closed' ? $('.tempSideNav').width('56') : $('.tempSideNav').width('240');
 	$(document).on('click', '.banana-pants', function (){
     	$('#test-this').append('<p class="banana-pants" style="color:#fff">Suprise<p>');
 	});
@@ -227,8 +225,6 @@ $(document).ready( function(){
 
         localStorage.setItem("navToggle", navOpen);
     });
-
-    var navToggle = localStorage.getItem('navToggle') == 'Closed' ? $('.tempSideNav').width('56') : $('.tempSideNav').width('240');
 
     $('#clear-storage').click( function() {localStorage.clear(); });
 });

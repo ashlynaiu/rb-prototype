@@ -18,7 +18,7 @@
 			      <p class="slds-text-heading--label">Leads</p>
 			      <div class="slds-grid">
 			        <div class="slds-grid slds-type-focus slds-no-space slds-dropdown-trigger" style="display:inherit;">
-			          <h1 class="slds-text-heading--medium slds-truncate" title="My Leads (truncates)">My Leads</h1>
+			          <h1 class="slds-text-heading--medium slds-truncate" title="My Leads (truncates)" id="list-title">Leads</h1>
 			          <button class="slds-button slds-button--icon-bare slds-shrink-none slds-align-middle slds-m-left--x-small">
 			            <svg aria-hidden="true" class="slds-button__icon">
 			              <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#down"></use>
@@ -27,9 +27,9 @@
 			          </button>
 			          <div class="slds-dropdown slds-dropdown--left slds-dropdown--menu slds-dropdown--actions slds-m-top--x-large">
 					    <ul class="slds-dropdown__list" role="menu">
-					      <li id="menu-13-0" href="#" class="slds-dropdown__item"><a href="#" class="slds-truncate" role="menuitem">All</a></li>
-					      <li id="menu-14-1" href="#" class="slds-dropdown__item"><a href="#" class="slds-truncate" role="menuitem">My Leads</a></li>
-					      <li id="menu-15-2" href="#" class="slds-dropdown__item"><a href="#" class="slds-truncate" role="menuitem">My Opportunities</a></li>
+					      <li id="menu-13-0" href="#" class="slds-dropdown__item"><a href="#" class="slds-truncate menuitem" role="menuitem" data-list-view="all">All</a></li>
+					      <li id="menu-14-1" href="#" class="slds-dropdown__item"><a href="#" class="slds-truncate menuitem" role="menuitem" data-list-view="leads">Leads</a></li>
+					      <li id="menu-15-2" href="#" class="slds-dropdown__item"><a href="#" class="slds-truncate menuitem" role="menuitem" data-list-view="opportunities">Opportunities</a></li>
 					    </ul>
 					  </div>
 			        </div>
@@ -102,7 +102,7 @@
 		</nav>
 
 		<!-- begin grid -->
-		<main class="slds-col slds-size--1-of-2 slds-medium-size--5-of-6 slds-large-size--8-of-12" style="overflow:scroll;">		
+		<main class="slds-col slds-size--1-of-2 slds-medium-size--5-of-6 slds-large-size--8-of-12" style="overflow:scroll;">	
 			<div class="row-main">
 				<!-- begin table -->
 				<table class="slds-table slds-table--bordered slds-max-medium-table--stacked">
@@ -179,53 +179,107 @@
 <script>
 $(document).ready(function(){
 
-	var queryLeadsAll = rbDB.queryAll("lead", { 
-                        sort: [["leadValue", "DESC"]]
-                      });
+	
+	$(document).on('click', '.menuitem', function (){
+	  
+	      var getListView = $(this).data('list-view');
+	      
+	      switch(getListView){
+	        case 'all':
+	          getOpportunitiesList('leadValue','DESC');
+	          localStorage.setItem("leadList", 'opportunities');
+	          $('#list-title').empty();
+	          $('#list-title').append('All');
+	          break;
+	        case 'leads':
+	          getLeadsList('leadValue','DESC');
+	          localStorage.setItem("leadList", 'leads');
+	          $('#list-title').empty();
+	          $('#list-title').append('Leads');
+	          break;
+	        case 'opportunities':
+	          getOpportunitiesList('leadValue','DESC');
+	          localStorage.setItem("leadList", 'opportunities');
+	          $('#list-title').empty();
+	          $('#list-title').append('Opportunities');
+	          break;
+	        default:
+	          getOpportunitiesList('leadValue','DESC');
+	          localStorage.setItem("leadList", 'opportunities');
+	          $('#list-title').empty();
+	          $('#list-title').append('All');
+	          break;
+	      };
+    });
 
-	queryLeadsAll.forEach(function(datum) {
-			switch(datum.rating){
-				case 4:
-					datum.rating = '<svg aria-hidden="true" class="icon-star-inactive"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-inactive"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-inactive"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg>';
-					break;
-				case 1:
-					datum.rating = '<svg aria-hidden="true" class="icon-star-active"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-inactive"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-inactive"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg>';
-					break;
-				case 2:
-					datum.rating = '<svg aria-hidden="true" class="icon-star-active"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-active"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-inactive"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg>';
-					break;
-				case 3:
-					datum.rating = '<svg aria-hidden="true" class="icon-star-active"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-active"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-active"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg>'; 
-					break;
-				default:
-					datum.rating = 'Unranked';
-					break;
-			};
-		// uid: 'L1', 
-		// firstName: 'Rachel',
-		// lastName: 'Adams',
-		// type: 'Credit Card',
-		// leadValue: getRandomInt(45, 100),
-		// rating: getRandomInt(1, 3),
-		// quality: 'a3',
-		// status: 'Open',
-		// creditScore: getRandomInt(550, 900),
-		// assignedTo: '--',
-		// source: 'mobile',
-		// lastContacted: getRandomDate('past'),
-		// lastActivity: getRandomDate('future'),
-		// products:'credit checking',
+	function getLeadsList(sortby, sortorder){
+		var queryResult = rbDB.queryAll("lead", {sort: [[sortby, sortorder]] });
+		$('#leadlistTable').empty();
+		queryResult.forEach(function(datum) {
+				switch(datum.rating){
+					case 4:
+						datum.rating = '<svg aria-hidden="true" class="icon-star-inactive"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-inactive"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-inactive"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg>';
+						break;
+					case 1:
+						datum.rating = '<svg aria-hidden="true" class="icon-star-active"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-inactive"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-inactive"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg>';
+						break;
+					case 2:
+						datum.rating = '<svg aria-hidden="true" class="icon-star-active"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-active"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-inactive"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg>';
+						break;
+					case 3:
+						datum.rating = '<svg aria-hidden="true" class="icon-star-active"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-active"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-active"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg>'; 
+						break;
+					default:
+						datum.rating = 'Unranked';
+						break;
+				};
+			//uid: 'L1', firstName: 'Rachel', lastName: 'Adams', type: 'Credit Card', leadValue: getRandomInt(45, 100), rating: getRandomInt(1, 3), quality: 'a3', status: 'Open', creditScore: getRandomInt(550, 900), assignedTo: '--', source: 'mobile', lastContacted: getRandomDate('past'), lastActivity: getRandomDate('future'), products:'credit checking',
+			$('#leadlistTable').append('<tr class="slds-hint-parent"> <td class="slds-row-select"> <label class="slds-checkbox" for="select-row'+datum.uid+'"> <input name="select-row'+datum.uid+'" type="checkbox" id="select-row'+datum.uid+'" /> <span class="slds-checkbox--faux"></span> <span class="slds-form-element__label slds-assistive-text">select row1</span> </label> </td> <td data-label="lead-name"><a href="#" class="slds-truncate">'+datum.firstName+' '+datum.lastName+'</a></td> <td data-label="rank"> '+datum.rating+' </td> <td data-label="value"> <span class="slds-truncate">$'+datum.leadValue+'</span> </td> <td data-label="interest"> '+datum.source+' </td> <td data-label="value"> <span class="slds-truncate">'+datum.type+'</span> </td> <td data-label="customer">'+datum.products+'</td><td data-label="activity"> <span class="slds-truncate">'+datum.assignedTo+'</span> </td> <td data-label="activity"> <span class="slds-truncate">'+datum.status+'</span> </td> <td><span class="slds-truncate">'+datum.lastContacted+'</span></td><td data-label="activity"> <span class="slds-truncate">'+datum.lastActivity+'</span> </td> <td class="slds-row-action"> <button class="slds-button slds-button--icon-border-filled slds-button--icon-border-small"> <svg aria-hidden="true" class="slds-button__icon slds-button__icon--hint slds-button__icon--small"> <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#down"></use> </svg> <span class="slds-assistive-text">Show More</span> </button> </td> </tr>') 
+		})
+	}
+	function getOpportunitiesList(sortby, sortorder){
+		var queryResult = rbDB.queryAll("opportunity", {sort: [[sortby, sortorder]] });
+		$('#leadlistTable').empty();
+		queryResult.forEach(function(datum) {
+				switch(datum.rating){
+					case 4:
+						datum.rating = '<svg aria-hidden="true" class="icon-star-inactive"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-inactive"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-inactive"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg>';
+						break;
+					case 1:
+						datum.rating = '<svg aria-hidden="true" class="icon-star-active"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-inactive"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-inactive"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg>';
+						break;
+					case 2:
+						datum.rating = '<svg aria-hidden="true" class="icon-star-active"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-active"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-inactive"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg>';
+						break;
+					case 3:
+						datum.rating = '<svg aria-hidden="true" class="icon-star-active"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-active"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-active"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg>'; 
+						break;
+					default:
+						datum.rating = 'Unranked';
+						break;
+				};
+			//uid: 'L1', firstName: 'Rachel', lastName: 'Adams', type: 'Credit Card', leadValue: getRandomInt(45, 100), rating: getRandomInt(1, 3), quality: 'a3', status: 'Open', creditScore: getRandomInt(550, 900), assignedTo: '--', source: 'mobile', lastContacted: getRandomDate('past'), lastActivity: getRandomDate('future'), products:'credit checking',
+			$('#leadlistTable').append('<tr class="slds-hint-parent"> <td class="slds-row-select"> <label class="slds-checkbox" for="select-row'+datum.uid+'"> <input name="select-row'+datum.uid+'" type="checkbox" id="select-row'+datum.uid+'" /> <span class="slds-checkbox--faux"></span> <span class="slds-form-element__label slds-assistive-text">select row1</span> </label> </td> <td data-label="lead-name"><a href="#" class="slds-truncate">'+datum.firstName+' '+datum.lastName+'</a></td> <td data-label="rank"> '+datum.rating+' </td> <td data-label="value"> <span class="slds-truncate">$'+datum.leadValue+'</span> </td> <td data-label="interest"> '+datum.source+' </td> <td data-label="value"> <span class="slds-truncate">'+datum.type+'</span> </td> <td data-label="customer">'+datum.products+'</td><td data-label="activity"> <span class="slds-truncate">'+datum.assignedTo+'</span> </td> <td data-label="activity"> <span class="slds-truncate">'+datum.status+'</span> </td> <td><span class="slds-truncate">'+datum.lastContacted+'</span></td><td data-label="activity"> <span class="slds-truncate">'+datum.lastActivity+'</span> </td> <td class="slds-row-action"> <button class="slds-button slds-button--icon-border-filled slds-button--icon-border-small"> <svg aria-hidden="true" class="slds-button__icon slds-button__icon--hint slds-button__icon--small"> <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#down"></use> </svg> <span class="slds-assistive-text">Show More</span> </button> </td> </tr>') 
+		})
+	}
 
-		$('#leadlistTable').append('<tr class="slds-hint-parent"> <td class="slds-row-select"> <label class="slds-checkbox" for="select-row'+datum.uid+'"> <input name="select-row'+datum.uid+'" type="checkbox" id="select-row'+datum.uid+'" /> <span class="slds-checkbox--faux"></span> <span class="slds-form-element__label slds-assistive-text">select row1</span> </label> </td> <td data-label="lead-name"><a href="#" class="slds-truncate">'+datum.firstName+' '+datum.lastName+'</a></td> <td data-label="rank"> '+datum.rating+' </td> <td data-label="value"> <span class="slds-truncate">$'+datum.leadValue+'</span> </td> <td data-label="interest"> '+datum.source+' </td> <td data-label="value"> <span class="slds-truncate">'+datum.type+'</span> </td> <td data-label="customer">'+datum.products+'</td><td data-label="activity"> <span class="slds-truncate">'+datum.assignedTo+'</span> </td> <td data-label="activity"> <span class="slds-truncate">'+datum.status+'</span> </td> <td><span class="slds-truncate">'+datum.lastContacted+'</span></td><td data-label="activity"> <span class="slds-truncate">'+datum.lastActivity+'</span> </td> <td class="slds-row-action"> <button class="slds-button slds-button--icon-border-filled slds-button--icon-border-small"> <svg aria-hidden="true" class="slds-button__icon slds-button__icon--hint slds-button__icon--small"> <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#down"></use> </svg> <span class="slds-assistive-text">Show More</span> </button> </td> </tr>') 
-	})
 
+	if (!localStorage.getItem("leadList")) {
+		// Set data
+		localStorage.setItem("leadList", 'leads')
+	}
 
-	//data.forEach(function(datum) {
-	//	$('#myTestElement').append('<tr><td>'+datum.name+'</td><td>'+datum.value+'<td><td>'+datum.datetime+'<td></tr>')
-	//})
-
-	// to clear the data
-	// localStorage.clear()
-
+	var leadListStored = localStorage.getItem('leadList')
+	switch(leadListStored){
+	    case 'leads':
+	      getLeadsList('leadValue','DESC');
+	      break;
+	    case 'opportunities':
+	      getOpportunitiesList('leadValue','DESC');
+	      break;
+	    default:
+	      getLeadsList('leadValue','DESC');
+	      break;
+	 };
 })
 </script>
