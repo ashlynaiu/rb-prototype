@@ -9,6 +9,8 @@ gem 'rails', '4.2.4'
 
 gem 'sqlite3'
 
+gem 'faker'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
