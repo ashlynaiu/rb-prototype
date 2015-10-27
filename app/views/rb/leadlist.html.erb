@@ -102,68 +102,12 @@
 		</nav>
 
 		<!-- begin grid -->
-		<main class="slds-col slds-size--1-of-2 slds-medium-size--5-of-6 slds-large-size--8-of-12" style="overflow:scroll;">	
+		<main class="slds-col slds-size--1-of-2 slds-medium-size--5-of-6 slds-large-size--8-of-12">	
 			<div class="row-main">
 				<!-- begin table -->
 				<table class="slds-table slds-table--bordered slds-max-medium-table--stacked">
-				  <thead>
-				    <tr class="slds-text-heading--label">
-				      <th class="slds-row-select" scope="col">
-				        <label class="slds-checkbox" for="select-all">
-				          <input name="checkbox" type="checkbox" id="select-all" />
-				          <span class="slds-checkbox--faux"></span>
-				          <span class="slds-form-element__label slds-assistive-text">select all</span>
-				        </label>
-				      </th>
-				      <th class="slds-is-sortable" scope="col">
-				        <span class="slds-truncate">Lead Name</span>
-				          <button class="slds-button slds-button--icon-bare slds-button--icon-border-small">
-				          <svg aria-hidden="true" class="slds-button__icon slds-button__icon--small">
-				            <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#arrowdown"></use>
-				          </svg>
-				        </button>
-				      </th>
-				      <th scope="col">
-				        <span class="slds-truncate">Lead Rank</span>
-				      </th>
-				      <th class="slds-is-sortable" scope="col">
-				        <span class="slds-truncate">Lead Value</span>
-				          <button class="slds-button slds-button--icon-bare slds-button--icon-border-small">
-				          <svg aria-hidden="true" class="slds-button__icon slds-button__icon--small" style="visibility:visible">
-				            <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#arrowdown"></use>
-				          </svg>
-				        </button>
-				      </th>
-				      <th scope="col">
-				        <span class="slds-truncate">Source</span>
-				      </th>
-				      <th scope="col">
-				        <span class="slds-truncate">Interested</span>
-				      </th>
-				      <th scope="col">
-				        <span class="slds-truncate">Owned</span>
-				      </th>
-				      <th scope="col">
-				        <span class="slds-truncate">Assigned To</span>
-				      </th>
-				      <th scope="col">
-				        <span class="slds-truncate">Status</span>
-				      </th>
-				      <th scope="col">
-				        <span class="slds-truncate">Last Contacted</span>
-				      </th>
-				      <th scope="col">
-				        <span class="slds-truncate">Last Activity</span>
-				      </th>
-				      <th class="slds-row-action" scope="col">
-				        <button class="slds-button slds-button--icon-border-filled slds-button--icon-border-small">
-				          <svg aria-hidden="true" class="slds-button__icon slds-button__icon--hint slds-button__icon--small">
-				            <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#down"></use>
-				          </svg>
-				          <span class="slds-assistive-text">Show More</span>
-				        </button>
-				      </th>
-				    </tr>
+				  <thead id="leadlistTableHead">
+				    
 				  </thead>
 				  <tbody id="leadlistTable">				 
 <!-- Populated from JSON -->				    
@@ -186,8 +130,8 @@ $(document).ready(function(){
 	      
 	      switch(getListView){
 	        case 'all':
-	          getOpportunitiesList('leadValue','DESC');
-	          localStorage.setItem("leadList", 'opportunities');
+	          getAllList('value','DESC');
+	          localStorage.setItem("leadList", 'all');
 	          $('#list-title').empty();
 	          $('#list-title').append('All');
 	          break;
@@ -204,15 +148,80 @@ $(document).ready(function(){
 	          $('#list-title').append('Opportunities');
 	          break;
 	        default:
-	          getOpportunitiesList('leadValue','DESC');
-	          localStorage.setItem("leadList", 'opportunities');
+	          getAllList('value','DESC');
+	          localStorage.setItem("leadList", 'all');
 	          $('#list-title').empty();
 	          $('#list-title').append('All');
 	          break;
 	      };
     });
+ 	function getAllList(sortby,sortorder)
+ 	{
+		if(rbDB.tableExists("tempTable")){
+			rbDB.dropTable("tempTable");
+		}
 
+		rbDB.createTable("tempTable", ["uid","firstName", "lastName", "type", "value", "rating", "source","products","assignedTo" ]);
+
+		var queryLeadResult = rbDB.queryAll("lead");
+		var queryOpportunityResult = rbDB.queryAll("opportunity");
+
+		queryLeadResult.forEach(function(datum) {
+			rbDB.insert("tempTable", {uid: ""+datum.uid+"", 
+				firstName: ""+datum.firstName+"", 
+				lastName: ""+datum.lastName+"", 
+				type: ""+datum.type+"",
+				value: datum.leadValue, 
+				rating: datum.rating, 
+				source: ""+datum.source+"",
+				products: ""+datum.products+"",  
+				assignedTo: ""+datum.assignedTo+""});
+		});
+
+		queryOpportunityResult.forEach(function(datum) {
+			rbDB.insert("tempTable", {uid: ""+datum.uid+"", 
+				firstName: ""+datum.firstName+"", 
+				lastName: ""+datum.lastName+"", 
+				type: ""+datum.type+"",
+				value: datum.leadValue, 
+				rating: datum.rating, 
+				source: ""+datum.source+"",
+				products: ""+datum.products+"",  
+				assignedTo: ""+datum.assignedTo+""});
+		});
+
+		rbDB.commit();
+		
+		$('#leadlistTableHead').empty();
+		$('#leadlistTableHead').append('<tr class="slds-text-heading--label"> <th class="slds-row-select" scope="col"> <label class="slds-checkbox" for="select-all"> <input name="checkbox" type="checkbox" id="select-all" /> <span class="slds-checkbox--faux"></span> <span class="slds-form-element__label slds-assistive-text">select all</span> </label> </th> <th class="slds-is-sortable" scope="col"> <span class="slds-truncate">Lead Name</span> <button class="slds-button slds-button--icon-bare slds-button--icon-border-small"> <svg aria-hidden="true" class="slds-button__icon slds-button__icon--small"> <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#arrowdown"></use> </svg> </button> </th> <th scope="col"> <span class="slds-truncate">Lead Rank</span> </th> <th class="slds-is-sortable" scope="col"> <span class="slds-truncate">Lead Value</span> <button class="slds-button slds-button--icon-bare slds-button--icon-border-small"> <svg aria-hidden="true" class="slds-button__icon slds-button__icon--small" style="visibility:visible"> <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#arrowdown"></use> </svg> </button> </th> <th scope="col"> <span class="slds-truncate">Source</span> </th> <th scope="col"> <span class="slds-truncate">Interested</span> </th> <th scope="col"> <span class="slds-truncate">Owned</span> </th> <th scope="col"> <span class="slds-truncate">Assigned To</span> </th><th class="slds-row-action" scope="col"> <button class="slds-button slds-button--icon-border-filled slds-button--icon-border-small"> <svg aria-hidden="true" class="slds-button__icon slds-button__icon--hint slds-button__icon--small"> <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#down"></use> </svg> <span class="slds-assistive-text">Show More</span> </button> </th> </tr>');
+		var queryResult = rbDB.queryAll("tempTable", {sort: [[sortby, sortorder]] });
+		$('#leadlistTable').empty();
+		queryResult.forEach(function(datum) {
+				switch(datum.rating){
+					case 4:
+						datum.rating = '<svg aria-hidden="true" class="icon-star-inactive"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-inactive"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-inactive"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg>';
+						break;
+					case 1:
+						datum.rating = '<svg aria-hidden="true" class="icon-star-active"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-inactive"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-inactive"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg>';
+						break;
+					case 2:
+						datum.rating = '<svg aria-hidden="true" class="icon-star-active"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-active"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-inactive"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg>';
+						break;
+					case 3:
+						datum.rating = '<svg aria-hidden="true" class="icon-star-active"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-active"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg> <svg aria-hidden="true" class="icon-star-active"> <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom11"></use> </svg>'; 
+						break;
+					default:
+						datum.rating = 'Unranked';
+						break;
+				};
+			$('#leadlistTable').append('<tr class="slds-hint-parent"> <td class="slds-row-select"> <label class="slds-checkbox" for="select-row'+datum.uid+'"> <input name="select-row'+datum.uid+'" type="checkbox" id="select-row'+datum.uid+'" /> <span class="slds-checkbox--faux"></span> <span class="slds-form-element__label slds-assistive-text">select row1</span> </label> </td> <td data-label="lead-name"><a href="#" class="slds-truncate">'+datum.firstName+' '+datum.lastName+'</a></td> <td data-label="rank"> '+datum.rating+' </td> <td data-label="value"> <span class="slds-truncate">$'+datum.value+'</span> </td> <td data-label="interest"> '+datum.source+' </td> <td data-label="value"> <span class="slds-truncate">'+datum.type+'</span> </td> <td data-label="customer">'+datum.products+'</td> <td data-label="value"> <span class="slds-truncate">'+datum.assignedTo+'</span> </td><td class="slds-row-action"> <button class="slds-button slds-button--icon-border-filled slds-button--icon-border-small"> <svg aria-hidden="true" class="slds-button__icon slds-button__icon--hint slds-button__icon--small"> <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#down"></use> </svg> <span class="slds-assistive-text">Show More</span> </button> </td> </tr>') 
+		})
+
+
+	};
 	function getLeadsList(sortby, sortorder){
+		$('#leadlistTableHead').empty();
+		$('#leadlistTableHead').append('<tr class="slds-text-heading--label"> <th class="slds-row-select" scope="col"> <label class="slds-checkbox" for="select-all"> <input name="checkbox" type="checkbox" id="select-all" /> <span class="slds-checkbox--faux"></span> <span class="slds-form-element__label slds-assistive-text">select all</span> </label> </th> <th class="slds-is-sortable" scope="col"> <span class="slds-truncate">Lead Name</span> <button class="slds-button slds-button--icon-bare slds-button--icon-border-small"> <svg aria-hidden="true" class="slds-button__icon slds-button__icon--small"> <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#arrowdown"></use> </svg> </button> </th> <th scope="col"> <span class="slds-truncate">Lead Rank</span> </th> <th class="slds-is-sortable" scope="col"> <span class="slds-truncate">Lead Value</span> <button class="slds-button slds-button--icon-bare slds-button--icon-border-small"> <svg aria-hidden="true" class="slds-button__icon slds-button__icon--small" style="visibility:visible"> <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#arrowdown"></use> </svg> </button> </th> <th scope="col"> <span class="slds-truncate">Source</span> </th> <th scope="col"> <span class="slds-truncate">Interested</span> </th> <th scope="col"> <span class="slds-truncate">Owned</span> </th> <th scope="col"> <span class="slds-truncate">Credit Score</span> </th> <th scope="col"> <span class="slds-truncate">Assigned To</span> </th> <th scope="col"> <span class="slds-truncate">Status</span> </th> <th scope="col"> <span class="slds-truncate">Last Contacted</span> </th> <th scope="col"> <span class="slds-truncate">Last Activity</span> </th> <th class="slds-row-action" scope="col"> <button class="slds-button slds-button--icon-border-filled slds-button--icon-border-small"> <svg aria-hidden="true" class="slds-button__icon slds-button__icon--hint slds-button__icon--small"> <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#down"></use> </svg> <span class="slds-assistive-text">Show More</span> </button> </th> </tr>');
 		var queryResult = rbDB.queryAll("lead", {sort: [[sortby, sortorder]] });
 		$('#leadlistTable').empty();
 		queryResult.forEach(function(datum) {
@@ -234,10 +243,12 @@ $(document).ready(function(){
 						break;
 				};
 			//uid: 'L1', firstName: 'Rachel', lastName: 'Adams', type: 'Credit Card', leadValue: getRandomInt(45, 100), rating: getRandomInt(1, 3), quality: 'a3', status: 'Open', creditScore: getRandomInt(550, 900), assignedTo: '--', source: 'mobile', lastContacted: getRandomDate('past'), lastActivity: getRandomDate('future'), products:'credit checking',
-			$('#leadlistTable').append('<tr class="slds-hint-parent"> <td class="slds-row-select"> <label class="slds-checkbox" for="select-row'+datum.uid+'"> <input name="select-row'+datum.uid+'" type="checkbox" id="select-row'+datum.uid+'" /> <span class="slds-checkbox--faux"></span> <span class="slds-form-element__label slds-assistive-text">select row1</span> </label> </td> <td data-label="lead-name"><a href="#" class="slds-truncate">'+datum.firstName+' '+datum.lastName+'</a></td> <td data-label="rank"> '+datum.rating+' </td> <td data-label="value"> <span class="slds-truncate">$'+datum.leadValue+'</span> </td> <td data-label="interest"> '+datum.source+' </td> <td data-label="value"> <span class="slds-truncate">'+datum.type+'</span> </td> <td data-label="customer">'+datum.products+'</td><td data-label="activity"> <span class="slds-truncate">'+datum.assignedTo+'</span> </td> <td data-label="activity"> <span class="slds-truncate">'+datum.status+'</span> </td> <td><span class="slds-truncate">'+datum.lastContacted+'</span></td><td data-label="activity"> <span class="slds-truncate">'+datum.lastActivity+'</span> </td> <td class="slds-row-action"> <button class="slds-button slds-button--icon-border-filled slds-button--icon-border-small"> <svg aria-hidden="true" class="slds-button__icon slds-button__icon--hint slds-button__icon--small"> <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#down"></use> </svg> <span class="slds-assistive-text">Show More</span> </button> </td> </tr>') 
+			$('#leadlistTable').append('<tr class="slds-hint-parent"> <td class="slds-row-select"> <label class="slds-checkbox" for="select-row'+datum.uid+'"> <input name="select-row'+datum.uid+'" type="checkbox" id="select-row'+datum.uid+'" /> <span class="slds-checkbox--faux"></span> <span class="slds-form-element__label slds-assistive-text">select row1</span> </label> </td> <td data-label="lead-name"><a href="#" class="slds-truncate">'+datum.firstName+' '+datum.lastName+'</a></td> <td data-label="rank"> '+datum.rating+' </td> <td data-label="value"> <span class="slds-truncate">$'+datum.leadValue+'</span> </td> <td data-label="interest"> '+datum.source+' </td> <td data-label="value"> <span class="slds-truncate">'+datum.type+'</span> </td> <td data-label="customer">'+datum.products+'</td><td data-label="activity"> <span class="slds-truncate">'+datum.creditScore+'</span> </td> <td data-label="activity"> <span class="slds-truncate">'+datum.assignedTo+'</span> </td> <td data-label="activity"> <span class="slds-truncate">'+datum.status+'</span> </td> <td><span class="slds-truncate">'+datum.lastContacted+'</span></td><td data-label="activity"> <span class="slds-truncate">'+datum.lastActivity+'</span> </td> <td class="slds-row-action"> <button class="slds-button slds-button--icon-border-filled slds-button--icon-border-small"> <svg aria-hidden="true" class="slds-button__icon slds-button__icon--hint slds-button__icon--small"> <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#down"></use> </svg> <span class="slds-assistive-text">Show More</span> </button> </td> </tr>') 
 		})
 	}
 	function getOpportunitiesList(sortby, sortorder){
+		$('#leadlistTableHead').empty();
+		$('#leadlistTableHead').append('<tr class="slds-text-heading--label"> <th class="slds-row-select" scope="col"> <label class="slds-checkbox" for="select-all"> <input name="checkbox" type="checkbox" id="select-all" /> <span class="slds-checkbox--faux"></span> <span class="slds-form-element__label slds-assistive-text">select all</span> </label> </th> <th class="slds-is-sortable" scope="col"> <span class="slds-truncate">Lead Name</span> <button class="slds-button slds-button--icon-bare slds-button--icon-border-small"> <svg aria-hidden="true" class="slds-button__icon slds-button__icon--small"> <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#arrowdown"></use> </svg> </button> </th> <th scope="col"> <span class="slds-truncate">Lead Rank</span> </th> <th class="slds-is-sortable" scope="col"> <span class="slds-truncate">Lead Value</span> <button class="slds-button slds-button--icon-bare slds-button--icon-border-small"> <svg aria-hidden="true" class="slds-button__icon slds-button__icon--small" style="visibility:visible"> <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#arrowdown"></use> </svg> </button> </th> <th scope="col"> <span class="slds-truncate">Source</span> </th> <th scope="col"> <span class="slds-truncate">Interested</span> </th> <th scope="col"> <span class="slds-truncate">Owned</span> </th> <th scope="col"> <span class="slds-truncate">Credit Score</span> </th> <th scope="col"> <span class="slds-truncate">Assigned To</span> </th> <th scope="col"> <span class="slds-truncate">Status</span> </th> <th scope="col"> <span class="slds-truncate">Last Contacted</span> </th> <th scope="col"> <span class="slds-truncate">Last Activity</span> </th> <th class="slds-row-action" scope="col"> <button class="slds-button slds-button--icon-border-filled slds-button--icon-border-small"> <svg aria-hidden="true" class="slds-button__icon slds-button__icon--hint slds-button__icon--small"> <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#down"></use> </svg> <span class="slds-assistive-text">Show More</span> </button> </th> </tr>');
 		var queryResult = rbDB.queryAll("opportunity", {sort: [[sortby, sortorder]] });
 		$('#leadlistTable').empty();
 		queryResult.forEach(function(datum) {
@@ -259,7 +270,7 @@ $(document).ready(function(){
 						break;
 				};
 			//uid: 'L1', firstName: 'Rachel', lastName: 'Adams', type: 'Credit Card', leadValue: getRandomInt(45, 100), rating: getRandomInt(1, 3), quality: 'a3', status: 'Open', creditScore: getRandomInt(550, 900), assignedTo: '--', source: 'mobile', lastContacted: getRandomDate('past'), lastActivity: getRandomDate('future'), products:'credit checking',
-			$('#leadlistTable').append('<tr class="slds-hint-parent"> <td class="slds-row-select"> <label class="slds-checkbox" for="select-row'+datum.uid+'"> <input name="select-row'+datum.uid+'" type="checkbox" id="select-row'+datum.uid+'" /> <span class="slds-checkbox--faux"></span> <span class="slds-form-element__label slds-assistive-text">select row1</span> </label> </td> <td data-label="lead-name"><a href="#" class="slds-truncate">'+datum.firstName+' '+datum.lastName+'</a></td> <td data-label="rank"> '+datum.rating+' </td> <td data-label="value"> <span class="slds-truncate">$'+datum.leadValue+'</span> </td> <td data-label="interest"> '+datum.source+' </td> <td data-label="value"> <span class="slds-truncate">'+datum.type+'</span> </td> <td data-label="customer">'+datum.products+'</td><td data-label="activity"> <span class="slds-truncate">'+datum.assignedTo+'</span> </td> <td data-label="activity"> <span class="slds-truncate">'+datum.status+'</span> </td> <td><span class="slds-truncate">'+datum.lastContacted+'</span></td><td data-label="activity"> <span class="slds-truncate">'+datum.lastActivity+'</span> </td> <td class="slds-row-action"> <button class="slds-button slds-button--icon-border-filled slds-button--icon-border-small"> <svg aria-hidden="true" class="slds-button__icon slds-button__icon--hint slds-button__icon--small"> <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#down"></use> </svg> <span class="slds-assistive-text">Show More</span> </button> </td> </tr>') 
+			$('#leadlistTable').append('<tr class="slds-hint-parent"> <td class="slds-row-select"> <label class="slds-checkbox" for="select-row'+datum.uid+'"> <input name="select-row'+datum.uid+'" type="checkbox" id="select-row'+datum.uid+'" /> <span class="slds-checkbox--faux"></span> <span class="slds-form-element__label slds-assistive-text">select row1</span> </label> </td> <td data-label="lead-name"><a href="#" class="slds-truncate">'+datum.firstName+' '+datum.lastName+'</a></td> <td data-label="rank"> '+datum.rating+' </td> <td data-label="value"> <span class="slds-truncate">$'+datum.leadValue+'</span> </td> <td data-label="interest"> '+datum.source+' </td> <td data-label="value"> <span class="slds-truncate">'+datum.type+'</span> </td> <td data-label="customer">'+datum.products+'</td><td data-label="activity"> <span class="slds-truncate">'+datum.creditScore+'</span> </td> <td data-label="activity"> <span class="slds-truncate">'+datum.assignedTo+'</span> </td> <td data-label="activity"> <span class="slds-truncate">'+datum.status+'</span> </td> <td><span class="slds-truncate">'+datum.lastContacted+'</span></td><td data-label="activity"> <span class="slds-truncate">'+datum.lastActivity+'</span> </td> <td class="slds-row-action"> <button class="slds-button slds-button--icon-border-filled slds-button--icon-border-small"> <svg aria-hidden="true" class="slds-button__icon slds-button__icon--hint slds-button__icon--small"> <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#down"></use> </svg> <span class="slds-assistive-text">Show More</span> </button> </td> </tr>') 
 		})
 	}
 
@@ -272,13 +283,19 @@ $(document).ready(function(){
 	var leadListStored = localStorage.getItem('leadList')
 	switch(leadListStored){
 	    case 'leads':
+	      $('#list-title').empty();
+	      $('#list-title').append('Leads');
 	      getLeadsList('leadValue','DESC');
 	      break;
 	    case 'opportunities':
+	      $('#list-title').empty();
+	      $('#list-title').append('Opportunities');
 	      getOpportunitiesList('leadValue','DESC');
 	      break;
 	    default:
-	      getLeadsList('leadValue','DESC');
+	      $('#list-title').empty();
+	      $('#list-title').append('All');
+	      getAllList('value','DESC');
 	      break;
 	 };
 })

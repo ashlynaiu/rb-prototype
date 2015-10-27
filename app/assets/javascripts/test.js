@@ -73,33 +73,65 @@ if(rbDB.isNew()){
 	
 	// create the "prospect" data
 	var rows = [
-		{uid: 'P001', name: 'P Baun'},
-		{uid: 'P002', name: 'P Pab'},
+		{uid: 'P1', name: 'P Baun'},
+		{uid: 'P2', name: 'P Pab'},
 	];
 	// create the "prospect" table
 	rbDB.createTableWithData('prospect', rows);
 
 	// create the "financialAccount" data
 	var rows = [
-		{uid: 'FA001', accountType: 'credit', role:'owner', accountId:'120934884', openingDate:'5/8/2012', balance:'250,465.25', status:'Good'},
-		{uid: 'FA002', accountType: 'mortgage', role:'owner', accountId:'120934234', openingDate:'6/8/2012', balance:'234,543', status:'Good'},
-		{uid: 'FA003', accountType: 'checking', role:'owner', accountId:'734950645', openingDate:'7/8/2012', balance:'80,435', status:'Good'},
-		{uid: 'FA004', accountType: 'credit', role:'owner', accountId:'647920583', openingDate:'8/8/2012', balance:'9,340', status:'Average'},
-		{uid: 'FA005', accountType: 'checking', role:'owner', accountId:'758930572', openingDate:'9/8/2012', balance:'10,342', status:'Poor'},
+		{uid: 'FA1', accountType: 'checking', role:'owner', accountId: getRandomInt(100000000, 999999999), status:'Good', 
+			json:{ 
+				checkingType:'Preferred Checking',
+				holders:'Joint',
+				currentBalance:getRandomInt(10000, 100000),
+				pendingWithdrawls: '--',
+				pendingDeposits:'--',
+				depositsNA:'--',
+				totalAvailableBalance:'--',
+				interestYTD:'--',
+				interestRate:'1.4',
+			},},
+		{uid: 'FA2', accountType: 'mortgage', role:'owner', accountId: getRandomInt(100000000, 999999999), status:'Good', 
+			json:{ 
+				mortgageType:'Regular',
+				nextPaymentDate:getRandomDate('future',31),
+				lastPaymentReceived:getRandomDate('past',31),
+				outstandingPrincipal:'--',
+				interestRate: '4.5',
+				remainingTerm:'--',
+
+			},},
+		{uid: 'FA3', accountType: 'credit', role:'owner', accountId: getRandomInt(100000000, 999999999), status:'Good', 
+			json:{ 
+				cardImage:'--',
+				cardType:'Freedom',
+				currentBalance:'--',
+				paymentDue:getRandomDate('future', 31),
+				minPayment:25,
+				lastStatementBalance:'--',
+				creditAvailable:'--',
+				creditLimit: 10000,
+			},},
+		{uid: 'FA4', accountType: 'brokerage', role:'owner', accountId: getRandomInt(100000000, 999999999), status:'Good', 
+			json:{ 
+				wealth:'Go Get Wealth Data',
+			},},
 	];
 	// create the "financialAccount" table
 	rbDB.createTableWithData('financialAccount', rows);
 
 	// create the "application" data
 	var rows = [
-		{uid: 'A001', name: 'P Baun'}
+		{uid: 'A1', name: 'P Baun'}
 	];
 	// create the "application" table
 	rbDB.createTableWithData('application', rows);
 
 	// create the "opportunity" data
 	var rows = [
-		{uid: 'O001', 
+		{uid: 'O1', 
 		firstName: 'Rachel',
 		lastName: 'Adams',
 		type: 'Credit Card',
@@ -143,42 +175,35 @@ if(rbDB.isNew()){
 
 	// create the "financialGoals" data
 	var rows = [
-		{uid: 'FG001', name: 'P Baun'}
+		{uid: 'FG1', name: 'P Baun'}
 	];
 	// create the "financialGoals" table
 	rbDB.createTableWithData('financialGoals', rows);
 
 	// create the "accountRelationships" data
 	var rows = [
-		{uid: 'AR001', name: 'P Baun'}
+		{uid: 'AR1', name: 'P Baun'}
 	];
 	// create the "accountRelationships" table
 	rbDB.createTableWithData('accountRelationships', rows);
 
 	// create the "employeeProfile" data
 	var rows = [
-		{uid: 'EP001', name: 'P Baun'}
+		{uid: 'EP1', name: 'P Baun'}
 	];
 	// create the "employeeProfile" table
 	rbDB.createTableWithData('employeeProfile', rows);
 
 	// create the "leadRanking" data
 	var rows = [
-		{uid: 'LR001', name: 'P Baun'}
+		{uid: 'LR1', name: 'P Baun'}
 	];
 	// create the "leadRanking" table
 	rbDB.createTableWithData('leadRanking', rows);
 
-
-
-
 	// create the "xref" data
 	var rows = [
-		{pid: 'C001', object: 'financialAccount', cid:'FA001'},
-		{pid: 'C001', object: 'financialAccount', cid:'FA002'},
-		{pid: 'C001', object: 'financialAccount', cid:'FA003'},
-		{pid: 'C002', object: 'financialAccount', cid:'FA004'},
-		{pid: 'C002', object: 'financialAccount', cid:'FA005'},
+		{pid: 'C1', object: 'financialAccount', cid:'FA001'},
 	];
 	// create the "leadRanking" table
 	rbDB.createTableWithData('xref', rows);
@@ -199,14 +224,11 @@ var queryResult1 = rbDB.queryAll("xref", {
     }
 });
 
-
-$(document).ready( function(){
-	queryResult1.forEach(function(datum) {
-		$('#main-tab-content-details').prepend('<div>'+datum.pid+': '+datum.object+': '+datum.cid+'</div>')
-	});
-
-
-});
+// $(document).ready( function(){
+// 	queryResult1.forEach(function(datum) {
+// 		$('#main-tab-content-details').prepend('<div>'+datum.pid+': '+datum.object+': '+datum.cid+'</div>')
+// 	});
+// });
 
 
 /*  MODAL */

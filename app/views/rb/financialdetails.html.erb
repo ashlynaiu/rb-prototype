@@ -507,9 +507,39 @@
 <script>
 $(document).ready(function(){
 
-	var financialDataTest = localStorage.getItem('financialDetailsType');
+    // see if there are existing items
+    if (!localStorage.getItem('financialDetailsType')) {
+      // Set data for testing
+      localStorage.setItem('financialDetailsType', 'FA1')
+    }
 
-	$('#basic-details-container').prepend(financialDataTest);
+
+	function getFinancialDetails(fid){
+		var queryResult = rbDB.queryAll("financialAccount",{
+		    query: {uid: fid}
+		});
+
+		queryResult.forEach(function(datum) {
+			switch(datum.accountType){
+				case 'checking':
+					$('#basic-details-container').prepend(datum.json.checkingType);
+					break;
+				case 'mortgage':
+					$('#basic-details-container').prepend(datum.json.mortgageType);
+					break;
+				case 'credit':
+					$('#basic-details-container').prepend(datum.json.cardType);
+					break;
+				case 'brokerage':
+					$('#basic-details-container').prepend(datum.json.wealth);
+					break;
+			}
+		})
+	};
+	var financialDataID = localStorage.getItem('financialDetailsType');
+	getFinancialDetails(financialDataID);
+
+
 
 	$('#collaborate__send').click(function() {
 

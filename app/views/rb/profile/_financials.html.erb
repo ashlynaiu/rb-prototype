@@ -68,7 +68,7 @@
       </thead>
       <tbody>
         <tr class="slds-hint-parent">
-          <td class="slds-size--1-of-5 financial-data-test" data-label="Name" data-financial-type = "checking"><%= link_to(root_path+'rb/financialdetails?i=02u6100000052eW') do %>Cumulus Annuity<% end %></td>
+          <td class="slds-size--1-of-5 financial-data-test" data-label="Name" data-financial-type = "FA1"><%= link_to(root_path+'rb/financialdetails?i=02u6100000052eW') do %>Cumulus Annuity<% end %></td>
           <td class="slds-size--1-of-5" data-label="Type">Annuity</td>
           <td class="slds-size--1-of-5" data-label="Role=">Owner</td>
           <td class="slds-size--1-of-5 slds-text-align--right" data-label="Open Date">5/8/2012</td>
@@ -84,7 +84,7 @@
           </td>
         </tr>
         <tr class="slds-hint-parent">
-          <td class="slds-size--1-of-5 financial-data-test" data-label="Name" data-financial-type = "mortgage"><%= link_to(root_path+'rb/financialdetails?i=02u6100000052eW') do %>Cumulus Mortgage<% end %></td>
+          <td class="slds-size--1-of-5 financial-data-test" data-label="Name" data-financial-type = "FA2"><%= link_to(root_path+'rb/financialdetails?i=02u6100000052eW') do %>Cumulus Mortgage<% end %></td>
           <td class="slds-size--1-of-5" data-label="Type">Mortgage</td>
           <td class="slds-size--1-of-5" data-label="Role=">Owner</td>
           <td class="slds-size--1-of-5 slds-text-align--right" data-label="Open Date">5/8/2012</td>
@@ -100,7 +100,7 @@
           </td>
         </tr>
         <tr class="slds-hint-parent">
-          <td class="slds-size--1-of-5 financial-data-test" data-label="Name" data-financial-type = "credit"><%= link_to(root_path+'rb/financialdetails?i=02u6100000052eW') do %>Cumulus Credit Card<% end %></td>
+          <td class="slds-size--1-of-5 financial-data-test" data-label="Name" data-financial-type = "FA3"><%= link_to(root_path+'rb/financialdetails?i=02u6100000052eW') do %>Cumulus Credit Card<% end %></td>
           <td class="slds-size--1-of-5" data-label="Type">Credit Card</td>
           <td class="slds-size--1-of-5" data-label="Role=">Owner</td>
           <td class="slds-size--1-of-5 slds-text-align--right" data-label="Open Date">5/8/2012</td>
@@ -196,28 +196,8 @@ $(document).ready( function(){
 
     $(document).on('click', '.financial-data-test', function (){
      
-    // see if there are existing items
-    if (!localStorage.getItem('financialDetailsType')) {
-      // Set data
-      localStorage.setItem('financialDetailsType', 'checking')
-    }
-
       var financialDetails = $(this).data('financial-type');
-      
-      switch(financialDetails){
-        case 'checking':
-          localStorage.setItem('financialDetailsType', 'checking')
-          break;
-        case 'mortgage':
-          localStorage.setItem('financialDetailsType', 'mortgage')
-          break;
-        case 'credit':
-          localStorage.setItem('financialDetailsType', 'credit')
-          break;
-        default:
-          localStorage.setItem('financialDetailsType', 'checking')
-          break;
-      };
+      localStorage.setItem('financialDetailsType', ''+financialDetails+'')
 
     });
 
