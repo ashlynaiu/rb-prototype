@@ -1,3 +1,8 @@
+function formatCurrency(n, currency, decimal) {
+    return currency + n.toFixed(decimal).replace(/./g, function(c, i, a) {
+        return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+    });
+}
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -81,7 +86,7 @@ if(rbDB.isNew()){
 
 	// create the "financialAccount" data
 	var rows = [
-		{uid: 'FA1', accountType: 'checking', role:'owner', accountId: getRandomInt(100000000, 999999999), status:'Good', 
+		{uid: 'FA1', accountType: 'checking', role:'owner', accountId: getRandomInt(100000000, 999999999), status:'Good', name:'Cumulus Checking',
 			json:{ 
 				checkingType:'Preferred Checking',
 				holders:'Joint',
@@ -93,7 +98,7 @@ if(rbDB.isNew()){
 				interestYTD:'--',
 				interestRate:'1.4',
 			},},
-		{uid: 'FA2', accountType: 'mortgage', role:'owner', accountId: getRandomInt(100000000, 999999999), status:'Good', 
+		{uid: 'FA2', accountType: 'mortgage', role:'owner', accountId: getRandomInt(100000000, 999999999), status:'Good', name:'Cumulus Mortgage',
 			json:{ 
 				mortgageType:'Regular',
 				nextPaymentDate:getRandomDate('future',31),
@@ -103,7 +108,7 @@ if(rbDB.isNew()){
 				remainingTerm:'--',
 
 			},},
-		{uid: 'FA3', accountType: 'credit', role:'owner', accountId: getRandomInt(100000000, 999999999), status:'Good', 
+		{uid: 'FA3', accountType: 'credit', role:'owner', accountId: getRandomInt(100000000, 999999999), status:'Good', name:'Cumulus Credit Card',
 			json:{ 
 				cardImage:'--',
 				cardType:'Freedom',
@@ -114,9 +119,12 @@ if(rbDB.isNew()){
 				creditAvailable:'--',
 				creditLimit: 10000,
 			},},
-		{uid: 'FA4', accountType: 'brokerage', role:'owner', accountId: getRandomInt(100000000, 999999999), status:'Good', 
+		{uid: 'FA4', accountType: 'brokerage', role:'owner', accountId: getRandomInt(100000000, 999999999), status:'Good', name:'Cumulus Brokerage',
 			json:{ 
-				wealth:'Go Get Wealth Data',
+				clientSegment:'Diamond',
+				lifetimeValue: getRandomInt(100000, 999999),
+				productsOwned:'',
+				lastInteraction: getRandomDate('past',365),
 			},},
 	];
 	// create the "financialAccount" table

@@ -512,7 +512,7 @@ $(document).ready(function(){
       // Set data for testing
       localStorage.setItem('financialDetailsType', 'FA1')
     }
-
+$('#basic-details-container').prepend(formatCurrency(20000,'$',2));
 
 	function getFinancialDetails(fid){
 		var queryResult = rbDB.queryAll("financialAccount",{
