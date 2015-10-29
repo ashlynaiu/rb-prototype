@@ -15,9 +15,9 @@
 						</svg>
 			        </div>
 			        <div class="slds-media__body">
-			          <p class="slds-text-heading--label"><%= link_to(root_path+'rb/people?i=02u6100000052eW') do %> Clients <% end %> > <%= link_to(root_path+'rb/profile?i=02u6100000052eW') do %>Rachel Adams <% end %> > Cumulus Annuity</p>
+			          <p class="slds-text-heading--label"><%= link_to(root_path+'rb/people?i=02u6100000052eW') do %> Clients <% end %> > <%= link_to(root_path+'rb/profile?i=02u6100000052eW') do %>Rachel Adams <% end %> > <span class="financial-account-name"></span></p>
 			          <div class="slds-grid">
-			            <h1 class="slds-text-heading--medium slds-m-right--small slds-truncate slds-align-middle" title="Record Title">Cumulus Annuity</h1>
+			            <h1 class="slds-text-heading--medium slds-m-right--small slds-truncate slds-align-middle financial-account-name" title="Record Title"></h1>
 			            <div class="slds-col slds-shrink-none">
 			              <button class="slds-button slds-button--neutral slds-not-selected" aria-live="assertive">
 			                <span class="slds-text-not-selected">
@@ -59,47 +59,8 @@
 			         </div>
 			    </div>
 			  </div>
-			  <div class="slds-grid slds-page-header__detail-row">
-			    <div class="slds-col--padded slds-size--1-of-4">
-			      <dl>
-			        <dt>
-			          <p class="slds-truncate" title="Field 1">Customer Segment</p>
-			        </dt>
-			        <dd>
-			          <p class="slds-text-body--regular slds-truncate" title="1">Diamond</p>
-			        </dd>
-			      </dl>
-			    </div>
-			    <div class="slds-col--padded slds-size--1-of-4">
-			      <dl>
-			        <dt>
-			          <p class="slds-truncate" title="Field 1">Life Time Value</p>
-			        </dt>
-			        <dd>
-			          <p class="slds-text-body--regular slds-truncate" title="2">$3,500,000</p>
-			        </dd>
-			      </dl>
-			    </div>
-			    <div class="slds-col--padded slds-size--1-of-4">
-			      <dl>
-			        <dt>
-			          <p class="slds-truncate" title="Field 1">Products</p>
-			        </dt>
-			        <dd>
-			          <p class="slds-text-body--regular slds-truncate" title="2">TBD</p>
-			        </dd>
-			      </dl>
-			    </div>
-			    <div class="slds-col--padded slds-size--1-of-4">
-			      <dl>
-			        <dt>
-			          <p class="slds-truncate" title="Field 1">Last Interaction</p>
-			        </dt>
-			        <dd>
-			          <p class="slds-text-body--regular slds-truncate" title="2">9/1/2015  •  Email</p>
-			        </dd>
-			      </dl>
-			    </div>
+			  <div class="slds-grid slds-page-header__detail-row" id="details-row"> 
+			    <!-- Populated from JS -->
 			  </div>
 			</div>
 			<!-- end header -->
@@ -512,77 +473,66 @@ $(document).ready(function(){
       // Set data for testing
       localStorage.setItem('financialDetailsType', 'FA1')
     }
-$('#basic-details-container').prepend(formatCurrency(20000,'$',2));
-
+	
 	function getFinancialDetails(fid){
 		var queryResult = rbDB.queryAll("financialAccount",{
 		    query: {uid: fid}
 		});
+		queryResult = queryResult[0];
 
-		queryResult.forEach(function(datum) {
-			switch(datum.accountType){
-				case 'checking':
-					$('#basic-details-container').prepend(datum.json.checkingType);
-					break;
-				case 'mortgage':
-					$('#basic-details-container').prepend(datum.json.mortgageType);
-					break;
-				case 'credit':
-					$('#basic-details-container').prepend(datum.json.cardType);
-					break;
-				case 'brokerage':
-					$('#basic-details-container').prepend(datum.json.wealth);
-					break;
-			}
+		switch(queryResult.accountType){
+			case 'checking':
+				var detailsHeader = [
+					{label:'Checking Type', value:queryResult.json.checkingType}, 
+					{label:'Holders', value:queryResult.json.holders},
+					{label:'Current Balance', value:formatCurrency(queryResult.json.currentBalance,'$',0)},
+					{label:'Total Balance', value:formatCurrency(queryResult.json.totalAvailableBalance,'$',0)},
+					];
+				break;
+			case 'mortgage':
+				var detailsHeader = [
+					{label:'Mortgage Type', value:queryResult.json.mortgageType}, 
+					{label:'Outstanding Principal', value:queryResult.json.outstandingPrincipal},
+					{label:'Last Payment Received', value:queryResult.json.lastPaymentReceived},
+					{label:'Next Payment Due', value:queryResult.json.nextPaymentDate},					
+					];
+				break;
+			case 'credit':
+				var detailsHeader = [
+					{label:'Card Type', value:queryResult.json.cardType}, 
+					{label:'Current Balance', value:queryResult.json.currentBalance},
+					{label:'Available Credit', value:queryResult.json.creditAvailable},
+					{label:'Credit Limit', value:queryResult.json.creditLimit},
+					{label:'Payment Due', value:queryResult.json.paymentDue},					
+					];
+				break;
+			case 'brokerage':
+				var detailsHeader = [
+					{label:'Wealth', value:'Need to get wealth examples'}, 				
+					];
+				break;
+		}
+		//Print out the Headers of the financial Object
+		var count = detailsHeader.length;
+		$(".financial-account-name").append(queryResult.name);
+		detailsHeader.forEach(function(datum) {
+			$('#details-row').append('<div class="slds-col--padded slds-size--1-of-'+count+'"> <dl> <dt> <p class="slds-truncate" title="'+datum.label+'">'+datum.label+'</p> </dt> <dd> <p class="slds-text-body--regular slds-truncate" title="'+datum.value+'">'+datum.value+'</p> </dd> </dl> </div>'); 
 		})
+		//Print out the Details of the financial object
+		$.each(queryResult, function(k, v) {
+			if (k == 'ID' || k == 'uid'){ 		
+			}else if(k == 'json'){
+				$.each(queryResult.json, function(kv, vk) {
+				$('#basic-details-container').append('<div class="slds-col--padded slds-medium-size--1-of-2"> <div class="slds-form-element slds-form-separator"> <label class="slds-form-element__label">'+kv+'</label> <div>'+vk+'</div> </div> </div>')
+			});
+			}else{
+			$('#basic-details-container').append('<div class="slds-col--padded slds-medium-size--1-of-2"> <div class="slds-form-element slds-form-separator"> <label class="slds-form-element__label">'+k+'</label> <div>'+v+'</div> </div> </div>')
+			}	  
+		});
+		
 	};
 	var financialDataID = localStorage.getItem('financialDetailsType');
 	getFinancialDetails(financialDataID);
-
-
-
-	$('#collaborate__send').click(function() {
-
-		var inputValue = $('#input__collaborate').val();
-		$('#collaborate-side').prepend('<div class="slds-p-bottom--large slds-m-bottom--large" style="border-bottom:1px solid #d8dde6;"> <div class="slds-media slds-tile"> <div class="slds-media__figure"> <span class="slds-avatar slds-avatar--circle slds-avatar--small"> <img src="<%= asset_path('images/Brad.jpg') %>" alt="portrait" /> </span> </div> <div class="slds-media__body"> <p class="slds-tile__title slds-truncate"><a href="#">Brad Lee</a></p> <ul class="slds-tile__detail slds-list--horizontal slds-has-dividers slds-text-body--small"> <li class="slds-truncate slds-list__item">September 8, 2015 at 10:23 AM</li> </ul> </div> </div> <div class="slds-card slds-card--empty slds-assistant-card-temp slds-m-top--small slds-p-around--small"> '+inputValue+'</div> <div> <div class="slds-form-element__control"> <input id="" class="slds-input" type="text" placeholder="Write a comment ..." /> </div> </div> </div>');
-	})
-		
-		//if (inputValue == '') return
-
-		// 1) We need to get the current data from localStorage
-		//var currentData = JSON.parse(localStorage.getItem('myTestData'))
-
-		// 2) then need to update the values
-		//currentData.push({ name: inputValue, value: '3', datetime: 'Tomorrow'})
-
-		// 3) save the updated data to localStorage so its available later
-		//localStorage.setItem("myTestData", JSON.stringify(currentData))
-
-		
-		// Basic Info
-		window.financialDetails = [
-		{label: 'Account Name', value: '--', append:'basic'},
-		{label: 'Account Type', value: '--', append:'basic'},
-		{label: 'Account ID', value: '--', append:'basic'},
-		{label: 'Date of Opening', value: '--', append:'basic'},
-		{label: 'Balance', value: '--', append:'basic'},
-		{label: 'Status', value: '--', append:'basic'},
-		]
-	// see if there are existing items
-	// var currentData = localStorage.getItem('profileDetailsData')
-	// Don't read the data from localstorage if theres already existing data
-	//if (!currentData) {
-		// Set data
-		localStorage.setItem("financialDetailsData", JSON.stringify(financialDetails))
-	//}
-
-	// Get data
-	var data = JSON.parse(localStorage.getItem('financialDetailsData'))
-	var numID = 0;
-	
-	data.forEach(function(datum) {
-
-		$('#'+datum.append+'-details-container').append('<div class="slds-col--padded slds-medium-size--1-of-2"> <div class="slds-form-element slds-form-separator"> <label class="slds-form-element__label">'+datum.label+'</label> <div>'+datum.value+'</div> </div> </div>') })
 
 });
 

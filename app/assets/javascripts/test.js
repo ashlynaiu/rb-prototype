@@ -8,12 +8,12 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function getRandomDate(pastorfuture, howmuch){
+function getRandomDate(pastorfuture, howlong){
 	if (pastorfuture == 'future'){
-		return Date.today().add(getRandomInt(0,howmuch)).day().toString('MM/dd/yyyy');
+		return Date.today().add(getRandomInt(0,howlong)).day().toString('MM/dd/yyyy');
 	}
 	if (pastorfuture == 'past'){
-		return Date.today().add(-getRandomInt(0,howmuch)).day().toString('MM/dd/yyyy');
+		return Date.today().add(-getRandomInt(0,howlong)).day().toString('MM/dd/yyyy');
 	}
 }
 
@@ -23,7 +23,7 @@ function getRandomArrayValue(array){
 
 function getRandomLeadData(){
 	var m = 2;
-	for (var i = 0; i < 100; i++) {
+	for (var i = 0; i < 30; i++) {
 		rbDB.insert("lead", 
 			{uid: 'L'+ m++, 
 			firstName: getRandomArrayValue(firstNameArray),
@@ -39,13 +39,14 @@ function getRandomLeadData(){
 			lastContacted: getRandomDate('past',500),
 			lastActivity: getRandomDate('past',500),
 			products:'Credit, Checking',
+			createDate: getRandomDate('past',365),
 			}
 		);
 	}
 }
 function getRandomOpportunityData(){
 	var m = 2;
-	for (var i = 0; i < 100; i++) {
+	for (var i = 0; i < 30; i++) {
 		rbDB.insert("opportunity", 
 			{uid: 'O'+ m++, 
 			firstName: getRandomArrayValue(firstNameArray),
@@ -61,6 +62,7 @@ function getRandomOpportunityData(){
 			lastContacted: getRandomDate('past',500),
 			lastActivity: getRandomDate('past',500),
 			products:'Credit, Checking',
+			createDate: getRandomDate('past',365),
 			}
 		);
 	}
@@ -94,7 +96,7 @@ if(rbDB.isNew()){
 				pendingWithdrawls: '--',
 				pendingDeposits:'--',
 				depositsNA:'--',
-				totalAvailableBalance:'--',
+				totalAvailableBalance:100000,
 				interestYTD:'--',
 				interestRate:'1.4',
 			},},
@@ -112,10 +114,10 @@ if(rbDB.isNew()){
 			json:{ 
 				cardImage:'--',
 				cardType:'Freedom',
-				currentBalance:'--',
+				currentBalance: getRandomInt(100, 10000),
 				paymentDue:getRandomDate('future', 31),
 				minPayment:25,
-				lastStatementBalance:'--',
+				lastStatementBalance:getRandomInt(100, 10000),
 				creditAvailable:'--',
 				creditLimit: 10000,
 			},},
@@ -153,6 +155,7 @@ if(rbDB.isNew()){
 		lastContacted: getRandomDate('past',500),
 		lastActivity: getRandomDate('past',500),
 		products:'Credit, Checking',
+		createDate: getRandomDate('past',1),
 		}
 	];
 	// create the "opportunity" table
@@ -175,6 +178,7 @@ if(rbDB.isNew()){
 		lastContacted: getRandomDate('past',500),
 		lastActivity: getRandomDate('past',500),
 		products:'Credit, Checking',
+		createDate: getRandomDate('past',1),
 	}];
 	// create the "lead" table
 	rbDB.createTableWithData('lead', rows);
