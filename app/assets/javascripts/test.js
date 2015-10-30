@@ -21,6 +21,20 @@ function getRandomArrayValue(array){
 	return array[getRandomInt(0,array.length-1)];
 };
 
+function getNextUid(table){
+	var rowCount = rbDB.rowCount(table);
+	queryResult = rbDB.queryAll(table,{
+		//sort: [['uid','DESC']],
+		query: {'ID':rowCount}
+	});
+
+	var tempUid = queryResult[0].uid;
+	var tempNum = tempUid.replace( /^\D+/g, '');
+	var tempPre = tempUid.replace(tempNum, '');
+	tempNum++;
+	return tempPre+tempNum;
+}
+
 function getRandomLeadData(){
 	var m = 2;
 	for (var i = 0; i < 30; i++) {
@@ -72,8 +86,8 @@ var rbDB = new localStorageDB('rb', localStorage);
 if(rbDB.isNew()){
 	// create the "client" data
 	var rows = [
-		{uid: 'C001', firstName: 'Rachel', lastName:'Adams'},
-		{uid: 'C002', firstName: 'Sarah', lastName:'Bui'},
+		{uid: 'C1', firstName: 'Rachel', lastName:'Adams'},
+		{uid: 'C2', firstName: 'Sarah', lastName:'Bui'},
 	];
 	// create the "client" table
 	rbDB.createTableWithData('client', rows);
