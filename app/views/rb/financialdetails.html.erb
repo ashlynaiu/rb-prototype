@@ -468,14 +468,6 @@
 <script>
 $(document).ready(function(){
 
-	var test1 = getNextUid('lead');
-	var test3 = getNextUid('opportunity');
-	var test2 = getNextUid('financialAccount');
-	$('#basic-details-container').prepend(test2+' : Financial Account -- ');
-	$('#basic-details-container').prepend('<div style="width:50%;">'+test1 +' : Lead -- '+ rbDB.rowCount('lead') +'</div>');
-	$('#basic-details-container').prepend('<div style="width:50%;">'+test3 +' : oppty -- '+ rbDB.rowCount('opportunity') +'</div>');
-	
-
     // see if there are existing items
     if (!localStorage.getItem('financialDetailsType')) {
       // Set data for testing
