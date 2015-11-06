@@ -1,4 +1,4 @@
 class RbController < ApplicationController
-  def leadlist
+  def opportunity
   end
 end

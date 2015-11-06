@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   
+  get 'rb/opportunity'
+
+  get 'rb/lead'
+
   get 'rb/leadlist'
 
   get 'rb/people'

@@ -147,6 +147,52 @@
 			<% end %>
 		</li>
 <% end %>
+<% if request.original_url.include? "rb/lead?" %>
+		<li class="selected-temp">
+			<%= link_to(root_path+'rb/lead?i=02u6100000052eW') do %>
+				<span class="slds-icon__container">
+				  <svg aria-hidden="true" class="slds-icon slds-icon-standard-lead">
+				    <use xlink:href="<%= asset_path('icons/standard-sprite/svg/symbols.svg') %>#lead"></use>
+				  </svg>
+				</span>
+				Lead - Layout
+			<% end %>
+		</li>
+<% else %>
+		<li>
+			<%= link_to(root_path+'rb/lead?i=02u6100000052eW') do %>
+				<span class="slds-icon__container">
+				  <svg aria-hidden="true" class="slds-icon">
+				    <use xlink:href="<%= asset_path('icons/standard-sprite/svg/symbols.svg') %>#lead"></use>
+				  </svg>
+				</span>
+				Lead - Layout
+			<% end %>
+		</li>
+<% end %>
+<% if request.original_url.include? "rb/opportunity" %>
+		<li class="selected-temp">
+			<%= link_to(root_path+'rb/opportunity?i=02u6100000052eW') do %>
+				<span class="slds-icon__container">
+				  <svg aria-hidden="true" class="slds-icon slds-icon-standard-opportunity">
+				    <use xlink:href="<%= asset_path('icons/standard-sprite/svg/symbols.svg') %>#opportunity"></use>
+				  </svg>
+				</span>
+				Opportunity - Layout
+			<% end %>
+		</li>
+<% else %>
+		<li>
+			<%= link_to(root_path+'rb/opportunity?i=02u6100000052eW') do %>
+				<span class="slds-icon__container">
+				  <svg aria-hidden="true" class="slds-icon">
+				    <use xlink:href="<%= asset_path('icons/standard-sprite/svg/symbols.svg') %>#opportunity"></use>
+				  </svg>
+				</span>
+				Opportunity - Layout
+			<% end %>
+		</li>
+<% end %>
 <% if request.original_url.include? "rb/people" %>
 		<li class="selected-temp">
 			<%= link_to(root_path+'rb/people?i=02u6100000052eW') do %>
