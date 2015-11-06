@@ -87,7 +87,7 @@
     </div>
   </div>
   <div class="slds-docked-composer__body slds-docked-composer__body--form slds-col slds-grid slds-grid--vertical slds-nowrap slds-size--1-of-1">
-    <div class="slds-grid">
+    <div class="slds-grid slds-wrap">
       <div class="slds-size--1-of-2 slds-p-right--x-small">
         <label class="slds-form-element__control slds-size--1-of-2">
           <span class="slds-form-element__helper">First Name</span>
@@ -100,19 +100,18 @@
           <input class="slds-input" placeholder="Last..." type="text" />
         </label>
       </div>
-    </div>
-    <div class="slds-form-element slds-size--1-of-1">
-      <label class="slds-form-element__label" for="selectSample1">Product Interest</label>
-      <div class="slds-form-element__control">
-        <select id="selectSample1" class="slds-select">
-          <option>Checking/Savings</option>
-          <option>Credit</option>
-          <option>Mortgage</option>
-          <option>Loan</option>
-        </select>
+      <div class="slds-form-element slds-size--1-of-1 slds-p-top--small">
+        <label class="slds-form-element__label" for="selectSample1">Product Interest</label>
+        <div class="slds-form-element__control">
+          <select id="selectSample1" class="slds-select">
+            <option>Checking/Savings</option>
+            <option>Credit</option>
+            <option>Mortgage</option>
+            <option>Loan</option>
+          </select>
+        </div>
       </div>
     </div>
-
   </div>
   <div class="slds-docked-composer__footer slds-shrink-none">
     <div class="slds-float--right slds-grid slds-grid--align-end slds-size--1-of-2 slds-text-align--right">
@@ -340,14 +339,18 @@
 
 <script>
 function closeComposer(m){
-    $(m).parents('.slds-docked-composer').toggleClass('slds-hide');
+  $(m).parents('.slds-docked-composer').toggleClass('slds-hide');
 }
-function closeComposerLarge(){
-  $(this).parents('.composer-large').toggleClass('slds-hide');
+function closeComposerLarge(m){
+  $(m).parents('.composer-large').toggleClass('slds-hide');
+}
+function minimizeComposer(m){
+  $(m).parents('.slds-docked-composer').toggleClass('slds-is-open');
 }
 function expandComposer(){
   $('#lead-large').toggleClass('slds-hide');
 }
+
 $('.close-composer').click(function(){
   closeComposer($(this))
 });
@@ -356,10 +359,10 @@ $('.expand-composer').click(function(){
   closeComposer($(this));
 });
 $('.close-composer-large').click(function(){
-  $(this).parents('.composer-large').toggleClass('slds-hide');
+  closeComposerLarge($(this));
 });
 
 $('.composer-minimize').click(function() {
-  $(this).parents('.slds-docked-composer').toggleClass('slds-is-open');
+  minimizeComposer($(this));
 });
 </script>
