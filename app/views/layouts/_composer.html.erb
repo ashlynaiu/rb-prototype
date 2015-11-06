@@ -1,3 +1,19 @@
+<!-- BEGIN Toast -->
+<div class="slds-notify-container slds-hide" id="success-message">
+  <div class="slds-notify slds-notify--toast slds-theme--success" role="alert">
+    <span class="slds-assistive-text">Info</span>
+    <button class="slds-button slds-notify__close">
+      <svg aria-hidden="true" class="slds-button__icon slds-button__icon--inverse">
+        <use xlink:href="/assets/icons/action-sprite/svg/symbols.svg#close"></use>
+      </svg>
+      <span class="slds-assistive-text">Close</span>
+    </button>
+    <div class="notify__content">
+      <h2 class="slds-text-heading--small">Lead Created Successfully.</h2>
+    </div>
+  </div>
+</div>
+<!-- END Toast -->
 <!-- BEGIN Call Composer -->
 <div class="slds-docked-composer slds-grid slds-grid--vertical slds-nowrap slds-is-open slds-hide" style="position:fixed; bottom:0; right:15px;">
   <div class="slds-docked-composer__header slds-grid slds-grid--align-spread slds-shrink-none">
@@ -87,23 +103,24 @@
     </div>
   </div>
   <div class="slds-docked-composer__body slds-docked-composer__body--form slds-col slds-grid slds-grid--vertical slds-nowrap slds-size--1-of-1">
+  <form id="lead-form">
     <div class="slds-grid slds-wrap">
       <div class="slds-size--1-of-2 slds-p-right--x-small">
         <label class="slds-form-element__control slds-size--1-of-2">
           <span class="slds-form-element__helper">First Name</span>
-          <input class="slds-input" placeholder="First..." type="text" />
+          <input class="slds-input" placeholder="First..." type="text" id="lead-first" />
         </label>
       </div>
       <div class="slds-size--1-of-2 slds-p-left--x-small">
         <label class="slds-form-element__control slds-size--1-of-2">
           <span class="slds-form-element__helper">Last Name</span>
-          <input class="slds-input" placeholder="Last..." type="text" />
+          <input class="slds-input" placeholder="Last..." type="text" id="lead-last" />
         </label>
       </div>
       <div class="slds-form-element slds-size--1-of-1 slds-p-top--small">
         <label class="slds-form-element__label" for="selectSample1">Product Interest</label>
         <div class="slds-form-element__control">
-          <select id="selectSample1" class="slds-select">
+          <select id="select1" class="slds-select">
             <option>Checking/Savings</option>
             <option>Credit</option>
             <option>Mortgage</option>
@@ -113,9 +130,10 @@
       </div>
     </div>
   </div>
+</form>
   <div class="slds-docked-composer__footer slds-shrink-none">
     <div class="slds-float--right slds-grid slds-grid--align-end slds-size--1-of-2 slds-text-align--right">
-      <button class="slds-button slds-button--brand">Save</button>
+      <button class="slds-button slds-button--brand composer-save">Save</button>
     </div>
   </div>
 </div>
@@ -365,4 +383,36 @@ $('.close-composer-large').click(function(){
 $('.composer-minimize').click(function() {
   minimizeComposer($(this));
 });
+
+$('.composer-save').click(function(){
+  var firstName = $('#lead-first').val();
+  var lastName = $('#lead-last').val();
+  var interest = $('#select1').val();
+
+  rbDB.insert("lead", 
+      {uid: getNextUid('lead'), 
+      firstName: firstName,
+      lastName: lastName,
+      type: interest,
+      //leadValue: getRandomInt(45, 100),
+      leadValue: 101,
+      rating: getRandomInt(1, 4),
+      quality: 'a3',
+      status: getRandomArrayValue(leadStatus),
+      creditScore: getRandomInt(550, 900),
+      assignedTo: '--',
+      source: getRandomArrayValue(leadSource),
+      lastContacted: getRandomDate('past',500),
+      lastActivity: getRandomDate('past',500),
+      products:'Credit, Checking',
+      createDate: getRandomDate('past',365),
+      }
+    );
+  rbDB.commit();
+  closeComposer($(this));
+  $("#success-message").fadeIn('fast').delay(2000).fadeOut('fast');
+})
+
+
+
 </script>
