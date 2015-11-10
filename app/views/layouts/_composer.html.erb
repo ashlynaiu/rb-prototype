@@ -14,59 +14,6 @@
   </div>
 </div>
 <!-- END Toast -->
-<!-- BEGIN Call Composer -->
-<div class="slds-docked-composer slds-grid slds-grid--vertical slds-nowrap slds-is-open slds-hide" style="position:fixed; bottom:0; right:15px;">
-  <div class="slds-docked-composer__header slds-grid slds-grid--align-spread slds-shrink-none">
-    <div class="slds-media slds-media--center">
-      <div class="slds-media__figure">
-        <span class="slds-icon__container icon-standard-call">
-          <svg aria-hidden="true" class="slds-icon slds-icon--x-small">
-            <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#call"></use>
-          </svg>
-          <span class="slds-assistive-text">Call Icon</span>
-        </span>
-      </div>
-      <div class="slds-media__body">Lei Chan</div>
-    </div>
-    <div class="slds-docked-composer__actions">
-      <button class="slds-button slds-button--icon-bare slds-button--icon-inverse">
-        <svg aria-hidden="true" class="slds-button__icon">
-          <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#minimize_window"></use>
-        </svg>
-        <span class="slds-assistive-text">Minimize window</span>
-      </button>
-      <button class="slds-button slds-button--icon-bare slds-button--icon-inverse">
-        <svg aria-hidden="true" class="slds-button__icon">
-          <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#expand_alt"></use>
-        </svg>
-        <span class="slds-assistive-text">Expand Composer</span>
-      </button>
-      <button class="slds-button slds-button--icon-bare slds-button--icon-inverse close-composer">
-        <svg aria-hidden="true" class="slds-button__icon">
-          <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
-        </svg>
-        <span class="slds-assistive-text">Close</span>
-      </button>
-    </div>
-  </div>
-  <div class="slds-docked-composer__body slds-grow slds-grid slds-grid--vertical slds-nowrap slds-size--1-of-1 slds-align-content-center">
-    <div class="slds-text-align--center">
-      <span class="slds-avatar slds-avatar--large">
-        <img src="/assets/images/avatar2.jpg" alt="Lei Chan" />
-      </span>
-      <h3 class="slds-text-heading--large">Lei Chan</h3>
-      <ul class="slds-list--horizontal slds-grid--align-center slds-has-dividers slds-text-body--small">
-        <li class="slds-list__item">VP of Sales</li>
-        <li class="slds-list__item ">Acme Corporation</li>
-      </ul>
-      <p class="slds-text-heading--large slds-m-top--x-large">Dialing...</p>
-    </div>
-  </div>
-  <div class="slds-docked-composer__footer slds-shrink-none slds-grid">
-    <button class="slds-button slds-button--destructive slds-size--1-of-1">End Call</button>
-  </div>
-</div>
-<!-- END Call Composer-->
 
 <!-- BEGIN Lead Composer -->
 <div class="slds-docked-composer slds-grid slds-grid--vertical slds-nowrap slds-hide slds-is-open" style="position:fixed; bottom:0; right:15px;" id="lead-composer">
@@ -133,7 +80,7 @@
 </form>
   <div class="slds-docked-composer__footer slds-shrink-none">
     <div class="slds-float--right slds-grid slds-grid--align-end slds-size--1-of-2 slds-text-align--right">
-      <button class="slds-button slds-button--brand composer-save">Save</button>
+      <button class="slds-button slds-button--brand composer-save" data-composer-type="small">Save</button>
     </div>
   </div>
 </div>
@@ -147,14 +94,14 @@
           <div class="slds-docked-composer__header slds-grid slds-grid--align-spread slds-shrink-none">
             <div class="slds-media slds-media--center">
               <div class="slds-media__figure">
-                <span class="slds-icon__container slds-icon-standard-email">
+                <span class="slds-icon__container slds-icon-standard-lead">
                   <svg aria-hidden="true" class="slds-icon slds-icon--small">
-                    <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#email"></use>
+                    <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#lead"></use>
                   </svg>
-                  <span class="slds-assistive-text">Email Icon</span>
+                  <span class="slds-assistive-text">Lead Icon</span>
                 </span>
               </div>
-              <div class="slds-media__body">New Email</div>
+              <div class="slds-media__body">New Lead</div>
             </div>
             <div class="slds-docked-composer__actions">
               <button class="slds-button slds-button--icon-bare slds-button--icon-inverse">
@@ -177,120 +124,37 @@
               </button>
             </div>
           </div>
-          <div class="slds-docked-composer__body slds-docked-composer__body--email slds-col slds-grid slds-grid--vertical slds-nowrap slds-size--1-of-1">
-            <div class="slds-grid slds-grid--align-spread">
-              <div class="slds-grid slds-grow slds-p-horizontal--small">
-                <label class="slds-email-composer__label slds-align-middle" for="emailComposerTo">To</label>
-                <input class="slds-input--bare slds-input--height slds-hide" id="emailComposerTo" type="text" />
-                <div class="slds-pill-container slds-show">
-                  <span class="slds-pill">
-                    <a href="#" class="slds-pill__label">
-                      <svg aria-hidden="true" class="slds-icon slds-icon-standard-account slds-icon--small">
-                        <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
-                      </svg>Lei Chan</a>
-                    <button class="slds-button slds-button--icon-bare">
-                      <svg aria-hidden="true" class="slds-button__icon">
-                        <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
-                      </svg>
-                      <span class="slds-assistive-text">Remove</span>
-                    </button>
-                  </span>
-                </div>
-              </div>
-              <div class="slds-grid slds-shrink-none slds-p-horizontal--small">
-                <button class="slds-button">Cc</button>
-                <button class="slds-button">Bcc</button>
-              </div>
-            </div>
-            <div class="slds-grid slds-p-horizontal--small slds-hide">
-              <label class="slds-email-composer__label slds-align-middle" for="emailComposerCc">Cc</label>
-              <input class="slds-input--bare slds-input--height slds-show" id="emailComposerCc" type="text" />
-              <div class="slds-pill-container slds-hide"></div>
-            </div>
-            <div class="slds-grid slds-p-horizontal--small slds-hide">
-              <label class="slds-email-composer__label slds-align-middle" for="emailComposerBcc">Bcc</label>
-              <input class="slds-input--bare slds-input--height slds-show" id="emailComposerBcc" type="text" />
-              <div class="slds-pill-container slds-hide"></div>
-            </div>
-            <input class="slds-input" placeholder="Enter Subject" />
-            <div class="slds-docked-composer__toolbar slds-shrink-none slds-grid slds-grid--align-spread">
-              <div class="slds-grid">
-                <div class="slds-button-group slds-picklist slds-picklist--fluid slds-shrink-none">
-                  <button class="slds-button slds-button--neutral slds-picklist__label picklist__label--small">Font
-                    <svg aria-hidden="true" class="slds-icon slds-icon--small">
-                      <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#down"></use>
-                    </svg>
-                  </button>
-                </div>
-                <div class="slds-button-group slds-picklist slds-picklist--fluid slds-shrink-none">
-                  <button class="slds-button slds-button--neutral slds-picklist__label picklist__label--small">14
-                    <svg aria-hidden="true" class="slds-icon slds-icon--small">
-                      <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#down"></use>
-                    </svg>
-                  </button>
-                </div>
-                <div class="slds-button-group" role="group">
-                  <button class="slds-button slds-button--icon-border-filled">
-                    <svg aria-hidden="true" class="slds-button__icon">
-                      <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#bold"></use>
-                    </svg>
-                    <span class="slds-assistive-text">Bold</span>
-                  </button>
-                  <button class="slds-button slds-button--icon-border-filled">
-                    <svg aria-hidden="true" class="slds-button__icon">
-                      <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#italic"></use>
-                    </svg>
-                    <span class="slds-assistive-text">Italic</span>
-                  </button>
-                  <button class="slds-button slds-button--icon-border-filled">
-                    <svg aria-hidden="true" class="slds-button__icon">
-                      <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#underline"></use>
-                    </svg>
-                    <span class="slds-assistive-text">Underline</span>
-                  </button>
-                </div>
-                <div class="slds-button-group" role="group">
-                  <button class="slds-button slds-button--icon-border-filled">
-                    <svg aria-hidden="true" class="slds-button__icon">
-                      <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#richtextnumberedlist"></use>
-                    </svg>
-                    <span class="slds-assistive-text">Numbered List</span>
-                  </button>
-                  <button class="slds-button slds-button--icon-border-filled">
-                    <svg aria-hidden="true" class="slds-button__icon">
-                      <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#richtextbulletedlist"></use>
-                    </svg>
-                    <span class="slds-assistive-text">Bulleted List</span>
-                  </button>
-                  <button class="slds-button slds-button--icon-border-filled">
-                    <svg aria-hidden="true" class="slds-button__icon">
-                      <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#left_align_text"></use>
-                    </svg>
-                    <span class="slds-assistive-text">Left Align Text</span>
-                  </button>
-                  <button class="slds-button slds-button--icon-border-filled">
-                    <svg aria-hidden="true" class="slds-button__icon">
-                      <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#center_align_text"></use>
-                    </svg>
-                    <span class="slds-assistive-text">Center Align Text</span>
-                  </button>
-                  <button class="slds-button slds-button--icon-border-filled">
-                    <svg aria-hidden="true" class="slds-button__icon">
-                      <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#right_align_text"></use>
-                    </svg>
-                    <span class="slds-assistive-text">Right Align Text</span>
-                  </button>
-                  <button class="slds-button slds-button--icon-border-filled">
-                    <svg aria-hidden="true" class="slds-button__icon">
-                      <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#link"></use>
-                    </svg>
-                    <span class="slds-assistive-text">Link</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-            <textarea class="slds-docked-composer__input slds-input--bare slds-text-longform slds-grow" placeholder="Jot down notes here..."></textarea>
-          </div>
+          <div class="slds-docked-composer__body slds-col slds-grid slds-grid--vertical slds-nowrap slds-size--1-of-1 slds-col--padded">
+
+<form id="lead-form" class="slds-p-top--small">
+    <div class="slds-grid slds-wrap">
+      <div class="slds-size--1-of-2 slds-p-right--x-small">
+        <label class="slds-form-element__control slds-size--1-of-2">
+          <span class="slds-form-element__helper">First Name</span>
+          <input class="slds-input" placeholder="First..." type="text" id="lead-firsta" />
+        </label>
+      </div>
+      <div class="slds-size--1-of-2 slds-p-left--x-small">
+        <label class="slds-form-element__control slds-size--1-of-2">
+          <span class="slds-form-element__helper">Last Name</span>
+          <input class="slds-input" placeholder="Last..." type="text" id="lead-lasta" />
+        </label>
+      </div>
+      <div class="slds-form-element slds-size--1-of-1 slds-p-top--small">
+        <label class="slds-form-element__label" for="selectSample1">Product Interest</label>
+        <div class="slds-form-element__control">
+          <select id="select1a" class="slds-select">
+            <option>Checking/Savings</option>
+            <option>Credit</option>
+            <option>Mortgage</option>
+            <option>Loan</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
           <div class="slds-docked-composer__footer slds-shrink-none">
             <div class="slds-float--right slds-grid slds-grid--align-end slds-size--1-of-2 slds-text-align--right">
               <button class="slds-button slds-button--icon-container">
@@ -323,7 +187,7 @@
                 </svg>
                 <span class="slds-assistive-text">Delete</span>
               </button>
-              <button class="slds-button slds-button--brand">Send</button>
+              <button class="slds-button slds-button--brand composer-save" data-composer-type="large">Save</button>
             </div>
             <div class="slds-float--left slds-size--1-of-2">
               <div class="slds-lookup" data-select="multi" data-scope="multi" data-typeahead="true">
@@ -385,10 +249,23 @@ $('.composer-minimize').click(function() {
 });
 
 $('.composer-save').click(function(){
-  var firstName = $('#lead-first').val();
-  var lastName = $('#lead-last').val();
-  var interest = $('#select1').val();
+  // Being Lazy, clean up hard-coded id's
 
+var tempVal = $(this).data('composer-type');
+switch(tempVal){
+  case'large':
+    var firstName = $('#lead-firsta').val();
+    var lastName = $('#lead-lasta').val();
+    var interest = $('#select1a').val();
+    closeComposerLarge($(this));
+  break;
+  case'small':
+    var firstName = $('#lead-first').val();
+    var lastName = $('#lead-last').val();
+    var interest = $('#select1').val();
+    closeComposer($(this));
+  break;
+}
   rbDB.insert("lead", 
       {uid: getNextUid('lead'), 
       firstName: firstName,
@@ -409,10 +286,8 @@ $('.composer-save').click(function(){
       }
     );
   rbDB.commit();
-  closeComposer($(this));
+  
   $("#success-message").fadeIn('fast').delay(2000).fadeOut('fast');
 })
-
-
 
 </script>
