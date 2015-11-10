@@ -139,3 +139,189 @@ aside{
 	width:1.2rem;
 	height:1.2rem;
 }
+
+#status {
+	text-align: center;
+}
+
+	#status ul {
+		list-style: none;
+		display: inline-table;
+	}
+		#status ul li {
+			display: inline;
+		}
+	
+		#status ul li a {
+			display: block;
+			float: left;
+			height: 32px;
+			background: #3498db;
+			text-align: center;
+			padding: 0px 80px 0px 80px;
+			position: relative;
+			margin: 0 10px 0 0; 
+			text-decoration: none;
+			color: #fff;
+			line-height: 32px;
+		}
+			#status ul li a:after {
+				content: "";  
+				border-top: 16px solid transparent;
+	 			border-bottom: 16px solid transparent;
+	  			border-left: 16px solid #3498db;
+				position: absolute; right: -16px; top: 0;
+				z-index: 1;
+			}
+			
+			#status ul li a:before {
+				content: "";  
+				border-top: 16px solid transparent;
+	  			border-bottom: 16px solid transparent;
+	  			border-left: 16px solid #fff;
+				position: absolute; left: 0; top: 0;
+			}
+	
+				#status ul li:first-child a {
+					border-top-left-radius: 16px; border-bottom-left-radius: 16px;
+				}
+				#status ul li:first-child a:before {
+					display: none; 
+				}
+				
+				#status ul li:last-child a {
+					padding-right: 80px;
+					border-top-right-radius: 16px; border-bottom-right-radius: 16px;
+				}
+				#status ul li:last-child a:after {
+					display: none; 
+				}
+			
+			#status ul li a:hover {
+				background: #fa5ba5;
+			}
+				#status ul li a:hover:after {
+					border-left-color: #fa5ba5;
+				}
+
+.status {
+	text-align: center;
+}
+
+	.status ul {
+		list-style: none;
+		display: inline-table;
+	}
+		.status ul li {
+			display: inline;
+		}
+	
+		.status ul li a {
+			display: block;
+			float: left;
+			height: 32px;
+			background: #3498db;
+			text-align: center;
+			padding: 0px 80px 0px 80px;
+			position: relative;
+			margin: 0 10px 0 0; 
+			text-decoration: none;
+			color: #fff;
+			line-height: 32px;
+		}
+			.status ul li a:after {
+				content: "";  
+				border-top: 16px solid transparent;
+	 			border-bottom: 16px solid transparent;
+	  			border-left: 16px solid #3498db;
+				position: absolute; right: -16px; top: 0;
+				z-index: 1;
+			}
+			
+			.status ul li a:before {
+				content: "";  
+				border-top: 16px solid transparent;
+	  			border-bottom: 16px solid transparent;
+	  			border-left: 16px solid #fff;
+				position: absolute; left: 0; top: 0;
+			}
+	
+				.status ul li:first-child a {
+					border-top-left-radius: 16px; border-bottom-left-radius: 16px;
+				}
+				.status ul li:first-child a:before {
+					display: none; 
+				}
+				
+				.status ul li:last-child a {
+					padding-right: 80px;
+					border-top-right-radius: 16px; border-bottom-right-radius: 16px;
+				}
+				.status ul li:last-child a:after {
+					display: none; 
+				}
+			
+			.status ul li a:hover {
+				background: #fa5ba5;
+			}
+				.status ul li a:hover:after {
+					border-left-color: #fa5ba5;
+				}
+.status-nav div{
+	background: #eaedf4;
+	text-align: center;
+	padding: 0px 0px;
+	position: relative;
+	margin: 0 10px 0 0; 
+	text-decoration: none;
+	color: #0070d2;
+	line-height: 32px;
+	min-width:80px;
+}
+	.status-nav div:after {
+		content: "";  
+		border-top: 16px solid transparent;
+		border-bottom: 16px solid transparent;
+		border-left: 16px solid #eaedf4;
+		position: absolute; right: -16px; top: 0;
+		z-index: 1;
+	}
+	
+	.status-nav div:before {
+		content: "";  
+		border-top: 16px solid transparent;
+		border-bottom: 16px solid transparent;
+		border-left: 16px solid #fff;
+		position: absolute; left: 0; top: 0;
+	}
+			.status-nav div:first-child {
+					border-top-left-radius: 16px; border-bottom-left-radius: 16px;
+				}
+				.status-nav div:first-child:before {
+					display: none; 
+				}
+				
+				.status-nav div:last-child{
+					padding-right: 0px;
+					border-top-right-radius: 16px; border-bottom-right-radius: 16px;
+				}
+				.status-nav div:last-child:after {
+					display: none; 
+				}
+			
+			.status-nav div:hover {
+				background: #fa5ba5;
+				cursor:pointer;
+				color:#fff;
+			}
+				.status-nav div:hover:after {
+					border-left-color: #fa5ba5;
+					cursor:pointer;
+				}
+	.status-nav .selected{
+		background-color:rgb(0, 112, 210);
+		color:#fff;
+	}
+		.status-nav .selected:after{
+			border-left-color:rgb(0, 112, 210);
+		}
