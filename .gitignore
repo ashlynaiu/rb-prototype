@@ -42,3 +42,5 @@ bower.json
 *.cache
 
 *.pid
+
+*.cache
