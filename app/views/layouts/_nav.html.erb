@@ -241,16 +241,16 @@
 <% end %>
 	</ul>
 	<div class="slds-p-top--large" style="text-align:center; width:240px;">
+		<%= link_to(root_path+"data/creator?i=02u6100000052eW") do %>
+			<button class="slds-button slds-theme--success slds-p-horizontal--small">Data Creator</button>
+		<% end %>
+	</div>
+	<div class="slds-p-top--large" style="text-align:center; width:240px;">
 		<button class="slds-button slds-theme--error slds-p-horizontal--small" id="clear-storage"> Clear Storage</button>
 	</div>
 	<div class="slds-p-top--large" style="text-align:center; width:240px;">
 		<button class="slds-button slds-theme--error slds-p-horizontal--small banana-pants" id="banana-pants" data-role-type="Super-rise"> Testing </button>
 	</div>
-
-	<div class="slds-p-top--large" style="text-align:center;" id ="test-this">
-	<%= react_component('HelloMessage', name: 'Rick') %>
-	</div>
-
 	<% (1..2).each do |i| %>
 	  '<%= Faker::Name.first_name  %>',    
 	<% end %>

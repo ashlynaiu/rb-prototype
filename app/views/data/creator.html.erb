@@ -1,0 +1,398 @@
+ <div class="grid-temp" style="height:100vh; width:100vw;">
+  <%= render 'layouts/nav' %>
+  <div class="slds-col grid-1" style="overflow:scroll;">
+   <div class="slds-grid slds-wrap slds-align-top">
+    <%= render 'layouts/searchbar' %>
+    <nav class="slds-col slds-size--1-of-1">
+    <!-- begin header -->
+      <!-- Toast Notification -->
+      <div class="slds-notify-container" style="margin-top:5.1rem; display:none;" id="success-message">
+        <div class="slds-notify slds-notify--toast slds-theme--success" role="alert">
+          <span class="slds-assistive-text">Info</span>
+          <button class="slds-button slds-notify__close">
+            <svg aria-hidden="true" class="slds-button__icon slds-button__icon--inverse">
+              <use xlink:href="/assets/icons/action-sprite/svg/symbols.svg#close"></use>
+            </svg>
+            <span class="slds-assistive-text">Close</span>
+          </button>
+          <div class="notify__content">
+            <h2 class="slds-text-heading--small">Rebalance Portfolios Successful.</h2>
+          </div>
+        </div>
+      </div>
+      <!-- End Toast Notification -->
+      <div class="slds-page-header">
+        <div class="slds-grid">
+            <div class="slds-media">
+                <div class="slds-media__figure">
+                  <svg aria-hidden="true" class="slds-icon slds-icon--large slds-icon-custom-15">
+                    <use xlink:href="<%= asset_path('icons/custom-sprite/svg/symbols.svg') %>#custom15"></use>
+                  </svg>
+                </div>
+              </div>
+            <div class="slds-col slds-has-flexi-truncate">
+              <p class="slds-text-heading--label">Random Data Generated Each Time</p>
+              <div class="slds-grid">
+                <div class="slds-grid slds-type-focus slds-no-space">
+                  <h1 class="slds-text-heading--medium slds-truncate" title="My Leads (truncates)">Data Creator</h1>
+                  <button class="slds-button slds-button--icon-bare slds-shrink-none slds-align-middle slds-m-left--x-small">
+                    <svg aria-hidden="true" class="slds-button__icon">
+                      <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#down"></use>
+                    </svg>
+                    <span class="slds-assistive-text">View More</span>
+                  </button>
+                </div>
+                <button class="slds-button slds-button--icon-more slds-shrink-none slds-m-left--large" aria-haspopup="true">
+                  <svg aria-hidden="true" class="slds-button__icon">
+                    <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#settings"></use>
+                  </svg>
+                  <span class="slds-assistive-text">Settings</span>
+                  <svg aria-hidden="true" class="slds-button__icon slds-button__icon--x-small">
+                    <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#down"></use>
+                  </svg>
+                </button>
+                <button class="slds-button slds-button--brand slds-button-space-left slds-m-right--medium slds-shrink-none slds-align-middle slds-hide" aria-hidden="true">Save</button>
+              </div>
+            </div>
+<!-- Begin Buttons -->
+            <div class="slds-col slds-no-flex slds-align-bottom">
+              <div class="slds-grid">
+                  <div class="slds-button-space-left">
+                    <button class="slds-button slds-button--icon-more" aria-haspopup="true">
+                      <svg aria-hidden="true" class="slds-button__icon">
+                        <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#table"></use>
+                      </svg>
+                      <span class="slds-assistive-text">Table</span>
+                      <svg aria-hidden="true" class="slds-button__icon slds-button__icon--x-small">
+                        <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#down"></use>
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="slds-button-group slds-button-space-left" role="group">
+<!-- Filter -->
+                <div class="slds-dropdown-trigger" aria-haspopup="true">
+                  <button class="slds-button slds-button--icon-border">
+                    <svg aria-hidden="true" class="slds-button__icon">
+                      <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#filterList"></use>
+                    </svg>
+                    <span class="slds-assistive-text">Show More</span>
+                  </button>
+                  <div class="slds-dropdown slds-dropdown--left slds-dropdown--menu">
+                    <ul class="slds-dropdown__list" role="menu">
+                      <li id="menu-86-1" href="#" class="slds-dropdown__item slds-text-heading--label" role="menuitem option" tabindex="-1"> <a href="#" tabindex="-1" class="slds-truncate"> Level </a> </li>
+                      <li id="menu-87-1" href="#" class="slds-dropdown__item" role="menuitem option" tabindex="-1">
+                        <a href="#" tabindex="-1" class="slds-truncate">
+                        <label class="slds-checkbox" for="select-filter1">
+                          <input name="select-filter1" class="filter-diamond" type="checkbox" id="select-filter1" />
+                          <span class="slds-checkbox--faux"></span>
+                        </label>
+                        <span class="slds-m-left--x-small"> Diamond </span>
+                        </a>
+                      </li>
+                      <li id="menu-87-2" href="#" class="slds-dropdown__item" role="menuitem option" tabindex="-1">
+                        <a href="#" tabindex="-1" class="slds-truncate">
+                        <label class="slds-checkbox" for="select-filter2">
+                          <input name="select-filter2" class="filter-platinum" type="checkbox" id="select-filter2" />
+                          <span class="slds-checkbox--faux"></span>
+                        </label>
+                        <span class="slds-m-left--x-small"> Platinum </span>
+                        </a>
+                      </li>
+                      <li id="menu-87-3" href="#" class="slds-dropdown__item" role="menuitem option" tabindex="-1">
+                        <a href="#" tabindex="-1" class="slds-truncate">
+                        <label class="slds-checkbox" for="select-filter3">
+                          <input name="select-filter3" class="filter-gold" type="checkbox" id="select-filter3" />
+                          <span class="slds-checkbox--faux"></span>
+                        </label>
+                        <span class="slds-m-left--x-small"> Gold </span>
+                        </a>
+                      </li>
+                      <li id="menu-87-4" href="#" class="slds-dropdown__item" role="menuitem option" tabindex="-1">
+                        <a href="#" tabindex="-1" class="slds-truncate">
+                        <label class="slds-checkbox" for="select-filter4">
+                          <input name="select-filter4" class="filter-silver" type="checkbox" id="select-filter4" />
+                          <span class="slds-checkbox--faux"></span>
+                        </label>
+                        <span class="slds-m-left--x-small"> Silver </span>
+                        </a>
+                      </li>
+                      <li id="menu-861-2" href="#" class="slds-dropdown__item slds-text-heading--label" role="menuitem option" tabindex="-1"> <a href="#" tabindex="-1" class="slds-truncate"> Alert Type </a> </li>
+                      <li id="menu-871-1" href="#" class="slds-dropdown__item" role="menuitem option" tabindex="-1">
+                        <a href="#" tabindex="-1" class="slds-truncate">
+                        <label class="slds-checkbox" for="select-filter5">
+                          <input name="select-filter5" class="filter-transfer" type="checkbox" id="select-filter5" />
+                          <span class="slds-checkbox--faux"></span>
+                        </label>
+                        <span class="slds-m-left--x-small"> Asset Transfer </span>
+                        </a>
+                      </li>
+                      <li id="menu-871-2" href="#" class="slds-dropdown__item" role="menuitem option" tabindex="-1">
+                        <a href="#" tabindex="-1" class="slds-truncate">
+                        <label class="slds-checkbox" for="select-filter6">
+                          <input name="select-filter6" class="filter-office" type="checkbox" id="select-filter6" />
+                          <span class="slds-checkbox--faux"></span>
+                        </label>
+                        <span class="slds-m-left--x-small"> Back Office </span>
+                        </a>
+                      </li>
+                      <li id="menu-871-3" href="#" class="slds-dropdown__item" role="menuitem option" tabindex="-1">
+                        <a href="#" tabindex="-1" class="slds-truncate">
+                        <label class="slds-checkbox" for="select-filter7">
+                          <input name="select-filter7" class="filter-drift" type="checkbox" id="select-filter7" />
+                          <span class="slds-checkbox--faux"></span>
+                        </label>
+                        <span class="slds-m-left--x-small"> Drift </span>
+                        </a>
+                      </li>             
+                    </ul>
+                  </div>
+                </div>
+                    <button class="slds-button slds-button--icon-border">
+                      <svg aria-hidden="true" class="slds-button__icon">
+                        <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#chart"></use>
+                      </svg>
+                      <span class="slds-assistive-text">Chart</span>
+                    </button>
+                    <button class="slds-button slds-button--icon-more">
+                      <svg aria-hidden="true" class="slds-button__icon">
+                        <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#sort"></use>
+                      </svg>
+                      <span class="slds-assistive-text">Sort</span>
+                      <svg aria-hidden="true" class="slds-button__icon slds-button__icon--x-small">
+                        <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#down"></use>
+                      </svg>
+                      <span class="slds-assistive-text">More</span>
+                    </button>
+                  </div>
+
+                  <div class="slds-button-group" role="group">
+                    <button class="slds-button slds-button--neutral">Actions</button>
+                    <div class="slds-button--last slds-dropdown-trigger">
+                      <button class="slds-button slds-button--icon-border-filled ">
+                        <svg aria-hidden="true" class="slds-button__icon">
+                          <use xlink:href="<%= asset_path('icons/utility-sprite/svg/symbols.svg') %>#down"></use>
+                        </svg>
+                        <span class="slds-assistive-text">More Actions</span>
+                      </button>
+                        <div class="slds-dropdown slds-dropdown--right slds-dropdown--menu slds-dropdown--actions ">
+                    <ul class="slds-dropdown__list" role="menu">
+                      <li id="menu-0-0" href="#" class="slds-dropdown__item"><a href="#" class="slds-truncate" role="menuitem">New Client...</a></li>
+                      <li id="menu-1-1" href="#" class="slds-dropdown__item"><a href="#" class="slds-truncate" role="menuitem">Create Tasks...</a></li>
+                      <li id="menu-2-2" href="#" class="slds-dropdown__item"><a href="#" class="slds-truncate" role="menuitem">Send to Campaign...</a></li>
+                      <li id="menu-rebalance-portfolio" href="#" class="slds-dropdown__item"><a href="#" class="slds-truncate" role="menuitem">Rebalance Portfolios</a></li>
+                      <li id="menu-4-4" href="#" class="slds-dropdown__item"><a href="#" class="slds-truncate" role="menuitem">Export to Excel</a></li>
+                    </ul>
+                  </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <p class="slds-text-body--small slds-m-top--x-small">Default is set to 900 rows</p>
+      </div>
+      <!-- end header -->
+    </nav>
+    <!-- begin grid -->
+  <main class="slds-col slds-size--1-of-2 slds-medium-size--5-of-6 slds-large-size--8-of-12">
+    <div class="slds-tabs--default row-main" style="padding:0 1.5rem;">
+      <ul class="slds-tabs--default__nav" role="tablist">
+        <li class="slds-tabs__item slds-text-heading--label center-tabs-temp slds-active" title="Details" role="presentation" id="main-tab-details"><a  role="tab" tabindex="0" aria-selected="true">Account</a></li>
+        <li class="slds-tabs__item slds-text-heading--label center-tabs-temp" title="Tearsheet" role="presentation" id="main-tab-tearsheet" style="overflow:visible;"><a  role="tab" tabindex="0" aria-selected="true">Contact</a></li>
+        <li class="slds-tabs__item slds-text-heading--label center-tabs-temp" title="Relationships" role="presentation" id="main-tab-relationships" style="overflow:visible;"><a href="#" role="tab" tabindex="-1" aria-selected="false">Household</a></li>
+        <li class="slds-tabs__item slds-text-heading--label center-tabs-temp" title="Financial Accounts" role="presentation" id="main-tab-financial"><a href="#" role="tab" tabindex="-1" aria-selected="false">Financial Account</a></li>
+        <li class="slds-tabs__item slds-text-heading--label center-tabs-temp" title="Goals" role="presentation" id="main-tab-goals" style="overflow:visible;"><a href="#" role="tab" tabindex="-1" aria-selected="false">Goal</a></li>
+      </ul>
+      <div class="slds-tabs__content main-tab-content slds-show" role="tabpanel" id="main-tab-content-details"  onclick="selectText('main-tab-content-details')">     
+        <table id="account-data">
+          <th>RecordTypeId</th>
+          <th>OwnerId</th>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>CleanStatus</th>
+          <th>Rating</th>
+          <th>BillingCity</th>
+          <th>BillingCountry</th>
+          <th>BillingPostalCode</th>
+          <th>BillingState</th>
+          <th>BillingStreet</th>
+          <th>ShippingCity</th>
+          <th>ShippingCountry</th>
+          <th>ShippingPostalCode</th>
+          <th>ShippingState</th>
+          <th>ShippingStreet</th>
+          <th>LastActivityDate</th>
+          <th>wm1pdm3__LastInteraction__c</th>
+          <th>wm1pdm3__LastReview__c</th>
+          <th>wm1pdm3__NextInteraction__c</th>
+          <th>wm1pdm3__NextReview__c</th>
+          <th>wm1pdm3__ClientCategory__c</th>
+          <th>wm1pdm3__FinancialInterests__c</th>
+          <th>wm1pdm3__IndividualType__c  </th>
+          <th>wm1pdm3__InvestmentExperience__c</th>
+          <th>wm1pdm3__InvestmentObjectives__c</th>
+          <th>wm1pdm3__MarketingSegment__c</th>
+          <th>wm1pdm3__PersonalInterests__c</th>
+          <th>wm1pdm3__RecordTypeName__c</th>
+          <th>wm1pdm3__ReviewFrequency__c</th>
+          <th>wm1pdm3__RiskTolerance__c</th>
+          <th>wm1pdm3__ServiceModel__c</th>
+          <th>wm1pdm3__Status__c</th>
+          <th>wm1pdm3__TimeHorizon__c</th>
+          <th>wm1pdm3__Notes__c</th>
+        </table>
+      </div>
+<!-- Tear Sheet -->
+      <div class="slds-tabs__content slds-hide main-tab-content" role="tabpanel" id="main-tab-content-tearsheet" onclick="selectText('main-tab-content-tearsheet')">
+        <table id="contact-data">
+          <th>Id</th>
+          <th>OwnerId</th>
+          <th>Salutation</th>
+          <th>FirstName</th>
+          <th>LastName</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>wm1pdm3__Gender__c</th>
+          <th>Birthdate</th>
+          <th>wm1pdm3__Age__c</th>
+          <th>Phone </th>
+          <th>HomePhone</th>
+          <th>MobilePhone</th>
+          <th>DoNotCall</th>
+          <th>HasOptedOutOfEmail</th>
+          <th>HasOptedOutOfFax</th>
+          <th>wm1pdm3__PrimaryAddressIsBilling__c</th>
+          <th>wm1pdm3__PrimaryAddressIsMailing__c</th>
+          <th>wm1pdm3__PrimaryAddressIsOther__c</th>
+          <th>wm1pdm3__PrimaryAddressIsShipping__c</th>
+          <th>MailingStreet</th>
+          <th>MailingCity</th>
+          <th>MailingState</th>
+          <th>MailingPostalCode</th>
+          <th>MailingCountry</th>
+          <th>OtherStreet</th>
+          <th>OtherCity</th>
+          <th>OtherState</th>
+          <th>OtherPostalCode</th>
+          <th>OtherCountry</th>
+          <th>wm1pdm3__OtherAddress__c</th>
+          <th>wm1pdm3__AnnualIncome__c</th>
+          <th>wm1pdm3__EmployedSince__c</th>
+          <th>wm1pdm3__TaxId__c</th>
+          <th>wm1pdm3__CurrentEmployer__c</th>
+          <th>wm1pdm3__Occupation__c</th>
+          <th>wm1pdm3__IndividualType__c</th>
+        </table>
+      </div>
+<!-- Begin Household -->
+      <div class="slds-tabs__content slds-hide main-tab-content" role="tabpanel" id="main-tab-content-relationships">
+        <table id="household-data">
+        </table>
+      </div>
+<!-- Financial Summary -->
+      <div class="slds-tabs__content slds-hide main-tab-content" role="tabpanel" id="main-tab-content-financial">
+        <table id="financial-account-data">
+        </table>
+      </div>
+<!-- Begin Goals -->
+      <div class="slds-tabs__content slds-hide main-tab-content" role="tabpanel" id="main-tab-content-goals">
+        <table id="goal-data">
+        </table>
+      </div>
+    </div>
+  </main>
+  </div>
+</div>
+<!-- end grid -->
+
+<style>
+main div.main-tab-content{
+  overflow:auto;
+}
+main td, main th{
+  white-space: nowrap;
+  padding-right:10px;
+}
+</style>
+<script>
+
+function selectText(containerid) {
+        if (document.selection) {
+            var range = document.body.createTextRange();
+            range.moveToElementText(document.getElementById(containerid));
+            range.select();
+        } else if (window.getSelection) {
+            var range = document.createRange();
+            range.selectNode(document.getElementById(containerid));
+            window.getSelection().addRange(range);
+        }
+    }
+
+$(document).ready(function(){
+
+  function getAccountsList(){
+    var queryResult = rbDB.queryAll("account");
+    queryResult.forEach(function(datum) {
+      var tempAge = getRandomInt(18, 101);
+      var tempBirthday = Date.today().add(-getRandomInt((tempAge*365),((tempAge+1)*365))).day().toString('yyyy-MM-dd');
+
+      
+      $('#account-data').append('<tr><td>'+datum.recordTypeId+'</td> <td>'+datum.ownerId+'</td> <td>'+datum.firstName+' '+datum.lastName+'</td> <td>'+datum.phone+'</td> <td>'+datum.cleanStatus+'</td> <td>'+datum.rating+'</td> <td>'+ datum.billingCity +'</td> <td>'+ datum.billingCountry +'</td> <td>'+ datum.billingPostalCode +'</td> <td>'+ datum.billingState +'</td> <td>'+ datum.billingStreet +'</td> <td>'+ datum.shippingCity +'</td> <td>'+ datum.shippingCountry +'</td> <td>'+ datum.shippingPostalCode +'</td> <td>'+ datum.shippingState +'</td> <td>'+ datum.shippingStreet +'</td> <td>'+datum.lastActivityDate+'</td> <td>'+datum.lastInteraction+'</td> <td>'+datum.lastReview+'</td> <td>'+datum.nextInteraction+'</td> <td>'+datum.nextReview+'</td> <td>'+datum.clientCategory+'</td> <td>'+datum.financialInterests+'</td> <td>'+datum.individualType+'</td> <td>'+datum.investmentExperience+'</td> <td>'+datum.investmentObjectives+'</td> <td>'+datum.marketingSegment+'</td> <td>'+datum.personalInterests+'</td> <td>'+datum.recordTypeName+'</td> <td>'+datum.reviewFrequency+'</td> <td>'+datum.riskTolerance+'</td> <td>'+datum.serviceModel+'</td> <td>'+datum.accountStatus+'</td> <td>'+datum.timeHorizon+'</td> <td>'+datum.notes+'</td></tr>');
+
+      $('#contact-data').append('<tr><td> </td><td> </td> <td>'+faker.name.prefix()+'</td> <td>'+datum.firstName+'</td> <td>'+datum.lastName+'</td> <td>'+datum.firstName+' '+datum.lastName+'</td> <td>'+faker.internet.email()+'</td> <td>'+getRandomArrayValue(gender)+'</td> <td>'+ tempBirthday +'</td> <td>'+ tempAge +'</td> <td>'+ faker.phone.phoneNumber() +'</td> <td>'+ faker.phone.phoneNumber() +'</td> <td>'+ faker.phone.phoneNumber() +'</td> <td>'+ getRandomArrayValue(trueFalse) +'</td> <td>'+ getRandomArrayValue(trueFalse) +'</td> <td>'+ getRandomArrayValue(trueFalse) +'</td> <td>FALSE</td> <td>TRUE</td> <td>FALSE</td> <td>FALSE</td> <td>'+ faker.address.streetAddress() +'</td> <td>'+ faker.address.city() +'</td> <td>'+ faker.address.stateAbbr() +'</td> <td>'+ faker.address.zipCode() +'</td> <td>USA</td> <td>'+ faker.address.streetAddress() +'</td> <td>'+ faker.address.city() +'</td> <td>'+ faker.address.stateAbbr() +'</td> <td>'+ faker.address.zipCode() +'</td> <td>USA</td> <td> </td> <td>'+ getRandomInt(45000,500000) +'</td> <td>'+ getRandomDate('past',7300) +'</td> <td> </td> <td>'+ faker.company.companyName() +'</td> <td>'+ faker.name.jobTitle() +'</td> <td>Individual</td> </tr>');
+}) }
+  getAccountsList();
+
+  function createGoal(){
+    for (var i = 0; i < 900; i++) {
+      var ggoalType = getRandomArrayValue(goalType);
+      $('#goal-data').append('<tr><td>'+ggoalType+' Fund</td><td>'+getRandomInt(1000,5000000)+'</td><td>Random Goal Description</td><td>'+getRandomArrayValue(goalStatus)+'</td><td>'+getRandomDate('future',1000)+'</td><td>'+getRandomInt(10000,5000000)+'</td><td>'+ggoalType+'</td></tr>')
+    }
+  }
+  createGoal();
+
+  function createFinancialAccount(){
+    for (var i = 0; i < 900; i++) {
+      var RecordType = getRandomArrayValue(financialRecordType);
+      var AccountTypeArray = financialAccountTypeBank;
+      if (RecordType == 'Investment Account'){
+        AccountTypeArray = financialAccountTypeInvestment;
+      }
+      var AccountType = getRandomArrayValue(AccountTypeArray);
+      $('#financial-account-data').append('<tr><td>'+getRandomArrayValue(financialAccountName)+' '+ AccountType +'</td><td>'+getRandomInt(1000,5000000)+'</td><td>Random Description/Notes</td><td>'+getRandomArrayValue(financialAccountSource)+'</td><td>'+AccountType+'</td><td>'+getRandomDate('past',500)+'</td><td>'+getRandomDate('past',1500)+'</td><td>'+getRandomArrayValue(financialAccountOwnership)+'</td><td>'+getRandomArrayValue(trueFalse)+'</td><td>'+getRandomArrayValue(trueFalse)+'</td><td>'+getRandomArrayValue(trueFalse)+'</td><td>'+RecordType+'</td><td>'+getRandomArrayValue(financialAccountStatus)+'</td><td>'+getRandomArrayValue(financialAccountTaxStatus)+'</td></tr>')
+    }
+  }
+  createFinancialAccount();
+
+});
+
+$("#main-tab-tearsheet").click(function(){
+    $(".center-tabs-temp").removeClass('slds-active');
+  $(this).addClass('slds-active');
+    $(".main-tab-content").hide();
+    $("#main-tab-content-tearsheet").show();
+});
+$("#main-tab-details").click(function(){
+  $(".center-tabs-temp").removeClass('slds-active');
+  $(this).addClass('slds-active');
+    $(".main-tab-content").hide();
+    $("#main-tab-content-details").show();
+});
+$("#main-tab-financial").click(function(){
+  $(".center-tabs-temp").removeClass('slds-active');
+  $(this).addClass('slds-active');
+    $(".main-tab-content").hide();
+    $("#main-tab-content-financial").show();
+});
+$("#main-tab-relationships").click(function(){
+    $(".center-tabs-temp").removeClass('slds-active');
+  $(this).addClass('slds-active');
+    $(".main-tab-content").hide();
+    $("#main-tab-content-relationships").show();
+});
+$("#main-tab-goals").click(function(){
+    $(".center-tabs-temp").removeClass('slds-active');
+  $(this).addClass('slds-active');
+    $(".main-tab-content").hide();
+    $("#main-tab-content-goals").show();
+});
+</script>

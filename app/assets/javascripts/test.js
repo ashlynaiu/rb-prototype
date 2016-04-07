@@ -10,10 +10,10 @@ function getRandomInt(min, max) {
 
 function getRandomDate(pastorfuture, howlong){
 	if (pastorfuture == 'future'){
-		return Date.today().add(getRandomInt(0,howlong)).day().toString('MM/dd/yyyy');
+		return Date.today().add(getRandomInt(0,howlong)).day().toString('yyyy-MM-dd');
 	}
 	if (pastorfuture == 'past'){
-		return Date.today().add(-getRandomInt(0,howlong)).day().toString('MM/dd/yyyy');
+		return Date.today().add(-getRandomInt(0,howlong)).day().toString('yyyy-MM-dd');
 	}
 }
 
@@ -34,6 +34,52 @@ function getNextUid(table){
 	var tempPre = tempUid.replace(tempNum, '');
 	tempNum++;
 	return tempPre+tempNum;
+}
+
+function getRandomAccountData(){
+	var m = 2;
+	for (var i = 0; i < 1000; i++) {
+		rbDB.insert("account", 
+			{uid: 'L'+ m++,
+			firstName: getRandomArrayValue(firstNameArray),
+			lastName: getRandomArrayValue(lastNameArray),
+			billingCity:faker.address.city(),
+			billingCountry:'USA',
+			billingPostalCode:faker.address.zipCode(),
+			billingState:faker.address.stateAbbr(),
+			billingStreet:faker.address.streetAddress(),
+			shippingCity:faker.address.city(),
+			shippingCountry:'USA',
+			shippingPostalCode:faker.address.zipCode(),
+			shippingState:faker.address.stateAbbr(),
+			shippingStreet:faker.address.streetAddress(),
+			phone:faker.phone.phoneNumber(),
+			lastActivityDate:getRandomDate('past',500),
+			rating:getRandomArrayValue(accountRating),
+			clientCategory:getRandomArrayValue(clientCategory),
+			financialInterests:getRandomArrayValue(financialInterests),
+			individualType:'Individual',
+			investmentExperience:getRandomArrayValue(investmentExperience),
+			investmentObjectives:getRandomArrayValue(investmentObjectives),
+			lastInteraction:getRandomDate('past',500),
+			lastReview:getRandomDate('past',500),
+			marketingSegment:getRandomArrayValue(marketingSegment),
+			nextInteraction:getRandomDate('future',500),
+			nextReview:getRandomDate('future',500),
+			notes: 'They have requested a personal follow up',
+			personalInterests:getRandomArrayValue(personalInterests),
+			recordTypeName: 'Individual',
+			reviewFrequency:getRandomArrayValue(reviewFrequency),
+			riskTolerance:getRandomArrayValue(riskTolerance),
+			serviceModel:getRandomArrayValue(serviceModel),
+			timeHorizon:getRandomArrayValue(timeHorizon),
+			accountStatus:'Active',
+			recordTypeId:' ',
+			ownerId:' ',
+			cleanStatus:'Pending'
+			}
+		);
+	}
 }
 
 function getRandomLeadData(){
@@ -199,6 +245,51 @@ if(rbDB.isNew()){
 	rbDB.createTableWithData('lead', rows);
 	// add Random Lead Data
 	getRandomLeadData();
+
+	// create the "account" data
+	var rows = [
+		{uid: 'A1', 
+		firstName: 'Rachel',
+		lastName: 'Adams',
+		billingCity:faker.address.city(),
+		billingCountry:'USA',
+		billingPostalCode:faker.address.zipCode(),
+		billingState:faker.address.stateAbbr(),
+		billingStreet:faker.address.streetAddress(),
+		shippingCity:faker.address.city(),
+		shippingCountry:'USA',
+		shippingPostalCode:faker.address.zipCode(),
+		shippingState:faker.address.stateAbbr(),
+		shippingStreet:faker.address.streetAddress(),
+		phone:faker.phone.phoneNumber(),
+		lastActivityDate:getRandomDate('past',500),
+		rating:getRandomArrayValue(accountRating),
+		clientCategory:getRandomArrayValue(clientCategory),
+		financialInterests:getRandomArrayValue(financialInterests),
+		individualType:'Individual',
+		investmentExperience:getRandomArrayValue(investmentExperience),
+		investmentObjectives:getRandomArrayValue(investmentObjectives),
+		lastInteraction:getRandomDate('past',500),
+		lastReview:getRandomDate('past',500),
+		marketingSegment:getRandomArrayValue(marketingSegment),
+		nextInteraction:getRandomDate('future',500),
+		nextReview:getRandomDate('future',500),
+		notes: 'They have requested a personal follow up',
+		personalInterests:getRandomArrayValue(personalInterests),
+		recordTypeName: 'Individual',
+		reviewFrequency:getRandomArrayValue(reviewFrequency),
+		riskTolerance:getRandomArrayValue(riskTolerance),
+		serviceModel:getRandomArrayValue(serviceModel),
+		timeHorizon:getRandomArrayValue(timeHorizon),
+		accountStatus:'Active',
+		recordTypeId:' ',
+		ownerId:' ',
+		cleanStatus:'Pending'
+	}];
+	// create the "account" table
+	rbDB.createTableWithData('account', rows);
+	// add Random account Data
+	getRandomAccountData();
 
 	// create the "financialGoals" data
 	var rows = [

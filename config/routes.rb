@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  get 'data/creator'
+
   get 'rb/opportunity'
 
   get 'rb/lead'
